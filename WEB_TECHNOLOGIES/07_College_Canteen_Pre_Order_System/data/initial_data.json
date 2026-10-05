@@ -1,0 +1,120 @@
+{
+  "canteenName": "Prathyusha Annapoorna Food Court",
+  "gstRatePercent": 5,
+  "categories": [
+    "Breakfast",
+    "Meals",
+    "Snacks",
+    "Drinks",
+    "Desserts"
+  ],
+  "orderStatuses": [
+    "Placed",
+    "Preparing",
+    "Ready",
+    "Collected",
+    "Cancelled"
+  ],
+  "menu": [
+    {
+      "id": "FOOD-01",
+      "name": "Masala Dosa with Sambar & Chutney",
+      "category": "Breakfast",
+      "price": 50,
+      "icon": "🥞",
+      "inStock": true,
+      "description": "Crispy golden crepe filled with spiced potato masala, served with piping hot sambar."
+    },
+    {
+      "id": "FOOD-02",
+      "name": "Idli & Vada Combo (2 Idli + 1 Vada)",
+      "category": "Breakfast",
+      "price": 40,
+      "icon": "🥟",
+      "inStock": true,
+      "description": "Steamed fluffy rice cakes paired with crispy medu vada and coconut chutney."
+    },
+    {
+      "id": "FOOD-03",
+      "name": "South Indian Executive Veg Meals",
+      "category": "Meals",
+      "price": 90,
+      "icon": "🍛",
+      "inStock": true,
+      "description": "Steamed Ponni rice served with Sambar, Rasam, Kara Kuzhambu, Kootu, Poriyal, Curd & Appalam."
+    },
+    {
+      "id": "FOOD-04",
+      "name": "Special Chicken Biryani Thali",
+      "category": "Meals",
+      "price": 140,
+      "icon": "🍗",
+      "inStock": true,
+      "description": "Aromatic Seeraga Samba chicken biryani served with boiled egg, onion raita, and brinjal gravy."
+    },
+    {
+      "id": "FOOD-05",
+      "name": "Crispy Veg Samosa (Set of 2)",
+      "category": "Snacks",
+      "price": 30,
+      "icon": "🔺",
+      "inStock": true,
+      "description": "Flaky pastries stuffed with spiced potatoes and peas, served with mint and tamarind dips."
+    },
+    {
+      "id": "FOOD-06",
+      "name": "Paneer Kathi Roll",
+      "category": "Snacks",
+      "price": 60,
+      "icon": "🌯",
+      "inStock": true,
+      "description": "Grilled marinated paneer wrapped in flaky whole wheat paratha with crisp onions."
+    },
+    {
+      "id": "FOOD-07",
+      "name": "Traditional Kumbakonam Degree Coffee",
+      "category": "Drinks",
+      "price": 20,
+      "icon": "☕",
+      "inStock": true,
+      "description": "Freshly brewed South Indian filter chicory coffee with frothy steamed milk."
+    },
+    {
+      "id": "FOOD-08",
+      "name": "Chilled Badam Milk with Saffron",
+      "category": "Drinks",
+      "price": 35,
+      "icon": "🥛",
+      "inStock": true,
+      "description": "Cold spiced almond milk infused with cardamom, saffron strands, and roasted nuts."
+    },
+    {
+      "id": "FOOD-09",
+      "name": "Gulab Jamun with Ice Cream",
+      "category": "Desserts",
+      "price": 45,
+      "icon": "🍨",
+      "inStock": true,
+      "description": "Warm milk dumplings in cardamom syrup served with a scoop of vanilla bean ice cream."
+    }
+  ],
+  "orders": [
+    {
+      "orderId": "ORD-8801",
+      "studentName": "Yuvathilagan M",
+      "studentId": "PEC2023CS001",
+      "phone": "9876543210",
+      "items": [
+        { "id": "FOOD-01", "name": "Masala Dosa with Sambar & Chutney", "price": 50, "qty": 2, "total": 100 },
+        { "id": "FOOD-07", "name": "Traditional Kumbakonam Degree Coffee", "price": 20, "qty": 1, "total": 20 }
+      ],
+      "subtotal": 120,
+      "tax": 6,
+      "grandTotal": 126,
+      "totalItems": 3,
+      "orderTime": "2026-10-05T08:45:00.000Z",
+      "status": "Ready",
+      "tokenNumber": "T-14"
+    }
+  ]
+}

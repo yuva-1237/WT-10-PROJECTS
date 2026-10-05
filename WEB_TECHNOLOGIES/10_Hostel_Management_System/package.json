@@ -1,0 +1,14 @@
+{
+  "name": "10-hostel-management-system",
+  "version": "1.0.0",
+  "description": "Hostel Management System for room allocations, leave approvals, maintenance grievances, and fee records.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/test.js",
+    "init-db": "node database/init_db.js"
+  },
+  "keywords": ["web-technologies", "hostel-management", "room-allocation", "vanilla-js"],
+  "author": "Yuvathilagan",
+  "license": "ISC"
+}

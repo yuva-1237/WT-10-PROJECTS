@@ -1,0 +1,114 @@
+{
+  "libraryName": "Prathyusha Central Digital Library",
+  "dailyFineRate": 5,
+  "standardLoanDays": 14,
+  "categories": [
+    "Computer Science",
+    "Information Technology",
+    "Electronics & Communication",
+    "Mechanical Engineering",
+    "Mathematics",
+    "General Literature"
+  ],
+  "books": [
+    {
+      "id": "BK-101",
+      "title": "Web Technologies: HTML, CSS, JavaScript, and Node.js",
+      "author": "Acharya & Sharma",
+      "category": "Computer Science",
+      "isbn": "978-0134682334",
+      "quantity": 5,
+      "availableCopies": 4,
+      "shelf": "Rack CS-04"
+    },
+    {
+      "id": "BK-102",
+      "title": "Artificial Intelligence: A Modern Approach",
+      "author": "Stuart Russell & Peter Norvig",
+      "category": "Computer Science",
+      "isbn": "978-0136042594",
+      "quantity": 4,
+      "availableCopies": 3,
+      "shelf": "Rack AI-01"
+    },
+    {
+      "id": "BK-103",
+      "title": "Database System Concepts (7th Edition)",
+      "author": "Silberschatz, Korth, Sudarshan",
+      "category": "Computer Science",
+      "isbn": "978-0078022159",
+      "quantity": 6,
+      "availableCopies": 6,
+      "shelf": "Rack DB-02"
+    },
+    {
+      "id": "BK-104",
+      "title": "Introduction to Algorithms (CLRS)",
+      "author": "Cormen, Leiserson, Rivest, Stein",
+      "category": "Computer Science",
+      "isbn": "978-0262033848",
+      "quantity": 3,
+      "availableCopies": 2,
+      "shelf": "Rack DS-01"
+    },
+    {
+      "id": "BK-105",
+      "title": "Discrete Mathematics and Its Applications",
+      "author": "Kenneth H. Rosen",
+      "category": "Mathematics",
+      "isbn": "978-1259676512",
+      "quantity": 4,
+      "availableCopies": 4,
+      "shelf": "Rack MA-03"
+    },
+    {
+      "id": "BK-106",
+      "title": "Computer Networks: A Systems Approach",
+      "author": "Larry Peterson & Bruce Davie",
+      "category": "Information Technology",
+      "isbn": "978-0123850591",
+      "quantity": 4,
+      "availableCopies": 4,
+      "shelf": "Rack NW-02"
+    }
+  ],
+  "issues": [
+    {
+      "id": "ISS-801",
+      "bookId": "BK-101",
+      "bookTitle": "Web Technologies: HTML, CSS, JavaScript, and Node.js",
+      "studentId": "PEC2023CS001",
+      "studentName": "Yuvathilagan M",
+      "issueDate": "2026-09-20",
+      "dueDate": "2026-10-04",
+      "returnDate": null,
+      "finePaid": 0,
+      "status": "Issued"
+    },
+    {
+      "id": "ISS-802",
+      "bookId": "BK-102",
+      "bookTitle": "Artificial Intelligence: A Modern Approach",
+      "studentId": "PEC2023CS002",
+      "studentName": "Kavitha R",
+      "issueDate": "2026-09-15",
+      "dueDate": "2026-09-29",
+      "returnDate": null,
+      "finePaid": 0,
+      "status": "Issued"
+    },
+    {
+      "id": "ISS-803",
+      "bookId": "BK-104",
+      "bookTitle": "Introduction to Algorithms (CLRS)",
+      "studentId": "PEC2023CS001",
+      "studentName": "Yuvathilagan M",
+      "issueDate": "2026-09-01",
+      "dueDate": "2026-09-15",
+      "returnDate": "2026-09-20",
+      "lateDays": 5,
+      "finePaid": 25,
+      "status": "Returned"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "institution": "Prathyusha Engineering College - Campus Maintenance Cell",
+  "categories": [
+    "Classroom",
+    "Laboratory",
+    "Wi-Fi",
+    "Electricity",
+    "Water",
+    "Hostel",
+    "Cleanliness",
+    "Infrastructure",
+    "Other"
+  ],
+  "workflowStatuses": [
+    "Submitted",
+    "Assigned",
+    "In Progress",
+    "Resolved",
+    "Closed"
+  ],
+  "technicians": [
+    { "id": "TECH-01", "name": "Venkatesan R", "department": "Electrical & Power" },
+    { "id": "TECH-02", "name": "Gopalakrishnan M", "department": "Plumbing & Water" },
+    { "id": "TECH-03", "name": "Karthik Raja S", "department": "Network & Wi-Fi" },
+    { "id": "TECH-04", "name": "Shanmugam P", "department": "Carpentry & Infrastructure" },
+    { "id": "TECH-05", "name": "Selvi M", "department": "Housekeeping & Cleanliness" }
+  ],
+  "complaints": [
+    {
+      "id": "CMP-3001",
+      "studentId": "PEC2023CS001",
+      "studentName": "Yuvathilagan M",
+      "department": "Computer Science and Engineering",
+      "phone": "9876543210",
+      "category": "Wi-Fi",
+      "location": "IT Block - 3rd Floor Lab 4",
+      "title": "Unstable Wi-Fi connectivity and high packet loss",
+      "description": "The campus Wi-Fi access point in Lab 4 frequently disconnects during laboratory sessions, impacting practical coursework.",
+      "imageName": null,
+      "priority": "High",
+      "assignedTo": "Karthik Raja S",
+      "status": "In Progress",
+      "submittedDate": "2026-10-02T10:30:00.000Z",
+      "resolvedDate": null,
+      "feedbackRating": null,
+      "feedbackComment": null
+    },
+    {
+      "id": "CMP-3002",
+      "studentId": "PEC2023CS002",
+      "studentName": "Kavitha R",
+      "department": "Computer Science and Engineering",
+      "phone": "9876543211",
+      "category": "Electricity",
+      "location": "Main Block - Classroom 204",
+      "title": "Ceiling fan regulator not functioning",
+      "description": "Fan row 2 regulator is jammed on speed 1, causing ventilation issues during afternoon lectures.",
+      "imageName": null,
+      "priority": "Medium",
+      "assignedTo": "Venkatesan R",
+      "status": "Assigned",
+      "submittedDate": "2026-10-03T11:15:00.000Z",
+      "resolvedDate": null,
+      "feedbackRating": null,
+      "feedbackComment": null
+    },
+    {
+      "id": "CMP-3003",
+      "studentId": "PEC2023IT003",
+      "studentName": "Dinesh Kumar S",
+      "department": "Information Technology",
+      "phone": "9876543212",
+      "category": "Water",
+      "location": "Hostel Block B - 1st Floor Cooler",
+      "title": "Drinking water cooler leaking continuously",
+      "description": "Water dispenser tap valve has loosened, resulting in puddles near room 108.",
+      "imageName": null,
+      "priority": "High",
+      "assignedTo": "Gopalakrishnan M",
+      "status": "Resolved",
+      "submittedDate": "2026-09-28T09:00:00.000Z",
+      "resolvedDate": "2026-09-29T15:30:00.000Z",
+      "feedbackRating": 5,
+      "feedbackComment": "Fixed promptly by plumber with new rubber washer. Great work!"
+    }
+  ]
+}

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Bus Tracking and Pass System | Prathyusha Transport</title>
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">🚌</div>
+        <div>
+          <h1>Prathyusha Engineering College</h1>
+          <p class="sub-brand">College Bus Tracking & Digital Pass Management System</p>
+        </div>
+      </div>
+      <div class="role-selector">
+        <label for="portalRoleSwitch"><strong>Active Portal:</strong></label>
+        <select id="portalRoleSwitch" class="form-select">
+          <option value="student">Student Transport Portal</option>
+          <option value="admin">Transport Department / Admin</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- STUDENT PORTAL -->
+    <section id="studentView" class="portal-view">
+      <!-- Tabs -->
+      <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="tabRoutes">🗺️ Bus Routes & Live Tracker</button>
+        <button class="tab-btn" data-tab="tabPass">🎫 Digital Bus Pass</button>
+      </div>
+
+      <!-- Tab 1: Bus Routes & Schedules -->
+      <div id="tabRoutes" class="tab-content active">
+        <div class="filter-bar card">
+          <div class="search-box">
+            <input type="text" id="routeSearchInput" class="form-input" placeholder="Search by Route name, Bus Number, or Boarding Stop (e.g. Chromepet, Guindy)...">
+          </div>
+          <div class="filter-box">
+            <select id="statusFilter" class="form-select">
+              <option value="">All Bus Statuses</option>
+              <option value="On Route">On Route</option>
+              <option value="At College">At College</option>
+              <option value="Not Started">Not Started</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+          <span id="routeCountBadge" class="badge badge-info">0 Routes Active</span>
+        </div>
+
+        <div id="busesGrid" class="buses-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Tab 2: Digital Bus Pass -->
+      <div id="tabPass" class="tab-content hidden">
+        <div class="pass-view-layout">
+          <!-- Pass Application Form -->
+          <div class="card pass-form-card">
+            <h3>Apply / Generate Digital Bus Pass</h3>
+            <p class="sub-text">Enter your student credentials to generate an official digital bus pass for the academic semester.</p>
+            
+            <form id="passForm" novalidate style="margin-top: 1rem;">
+              <div class="form-group">
+                <label for="passStudentId">Student ID <span class="required">*</span></label>
+                <input type="text" id="passStudentId" class="form-input" placeholder="e.g. PEC2023CS001" value="PEC2023CS001" required>
+                <div class="error-msg" id="errPassId"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="passStudentName">Full Student Name <span class="required">*</span></label>
+                <input type="text" id="passStudentName" class="form-input" placeholder="e.g. Yuvathilagan M" value="Yuvathilagan M" required>
+                <div class="error-msg" id="errPassName"></div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="passDept">Department</label>
+                  <select id="passDept" class="form-select">
+                    <option value="Computer Science and Engineering">CSE</option>
+                    <option value="Information Technology">IT</option>
+                    <option value="Electronics and Communication">ECE</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="passPhone">Contact Number <span class="required">*</span></label>
+                  <input type="tel" id="passPhone" class="form-input" placeholder="e.g. 9876543210" value="9876543210" required>
+                  <div class="error-msg" id="errPassPhone"></div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="passBusSelect">Assigned Bus & Route <span class="required">*</span></label>
+                  <select id="passBusSelect" class="form-select" required>
+                    <!-- Populated dynamically -->
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="passStopSelect">Designated Boarding Stop <span class="required">*</span></label>
+                  <select id="passStopSelect" class="form-select" required>
+                    <!-- Populated based on selected bus -->
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="passValidUntil">Pass Validity Date</label>
+                <input type="date" id="passValidUntil" class="form-input" value="2026-12-31" required>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">Generate Digital Bus Pass</button>
+            </form>
+          </div>
+
+          <!-- Digital Bus Pass Card Preview -->
+          <div class="pass-preview-container">
+            <div id="digitalBusPass" class="digital-bus-pass">
+              <div class="pass-header">
+                <div class="pass-college">PRATHYUSHA ENGINEERING COLLEGE</div>
+                <div class="pass-title">COLLEGE BUS PASS</div>
+              </div>
+
+              <div class="pass-body">
+                <div class="pass-avatar-box">
+                  <div class="pass-avatar">👨‍🎓</div>
+                  <span id="passStatusBadge" class="badge badge-success">VALID PASS</span>
+                </div>
+                <div class="pass-details">
+                  <div class="pass-field">
+                    <span class="label">Student Name:</span>
+                    <strong id="cardStudentName">Yuvathilagan M</strong>
+                  </div>
+                  <div class="pass-field">
+                    <span class="label">Student ID:</span>
+                    <span id="cardStudentId">PEC2023CS001</span>
+                  </div>
+                  <div class="pass-field">
+                    <span class="label">Route:</span>
+                    <strong id="cardRoute">Tambaram → PEC Campus</strong>
+                  </div>
+                  <div class="pass-field">
+                    <span class="label">Boarding Stop:</span>
+                    <span id="cardStop">Chromepet</span>
+                  </div>
+                  <div class="pass-field">
+                    <span class="label">Bus Number:</span>
+                    <span id="cardBusNo">TN-20-CZ-1001</span>
+                  </div>
+                  <div class="pass-field">
+                    <span class="label">Valid Until:</span>
+                    <strong id="cardExpiry" style="color:var(--primary);">31/12/2026</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Barcode / QR Simulation -->
+              <div class="pass-footer">
+                <div class="barcode-graphic">||| | |||| | ||||| || |||| ||| |||||</div>
+                <div class="pass-token" id="cardPassId">BPASS-9001</div>
+              </div>
+            </div>
+
+            <div class="pass-actions">
+              <button onclick="window.print()" class="btn btn-secondary btn-block">🖨️ Print Digital Pass</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN PORTAL -->
+    <section id="adminView" class="portal-view hidden">
+      <!-- Fleet KPI Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🚌</div>
+          <div>
+            <div class="stat-value" id="kpiTotalBuses">0</div>
+            <div class="stat-label">Total Fleet Buses</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🛣️</div>
+          <div>
+            <div class="stat-value" id="kpiOnRouteBuses">0</div>
+            <div class="stat-label">Buses On Route</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏫</div>
+          <div>
+            <div class="stat-value" id="kpiAtCollegeBuses">0</div>
+            <div class="stat-label">Arrived at Campus</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎫</div>
+          <div>
+            <div class="stat-value" id="kpiTotalPasses">0</div>
+            <div class="stat-label">Issued Student Passes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fleet Roster -->
+      <div class="card">
+        <div class="admin-top-bar">
+          <h2>Transit Fleet & Live Status Simulation</h2>
+          <div class="btn-group">
+            <button id="btnAddBus" class="btn btn-primary">+ Add New Route</button>
+            <button id="btnResetData" class="btn btn-outline">↺ Reset Sample Fleet</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Bus No</th>
+                <th>Route Name</th>
+                <th>Driver & Contact</th>
+                <th>Start Time</th>
+                <th>Current Stop</th>
+                <th>Current Status</th>
+                <th>Admin Transit Controls</th>
+              </tr>
+            </thead>
+            <tbody id="adminBusesTbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Issued Passes Ledger -->
+      <div class="card">
+        <h2>Active Student Bus Passes Directory</h2>
+        <div class="table-responsive" style="margin-top:1rem;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Pass ID</th>
+                <th>Student ID & Name</th>
+                <th>Department</th>
+                <th>Bus No & Route</th>
+                <th>Boarding Point</th>
+                <th>Expiry Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="adminPassesTbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Route Live Tracker (Visual Stop Progress Timeline) -->
+  <div id="trackerModal" class="modal-overlay hidden">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div>
+          <h3 id="trackerBusTitle">Live Route Tracking</h3>
+          <p id="trackerBusSub" class="sub-text">Route details</p>
+        </div>
+        <button class="modal-close" data-close="trackerModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="live-status-callout" id="trackerStatusCallout">
+          Status: <strong>On Route</strong>
+        </div>
+
+        <h4 style="margin: 1rem 0 0.5rem; font-size: 0.95rem;">Intermediate Stops Progress Timeline</h4>
+        <div id="trackerTimeline" class="route-timeline">
+          <!-- Timeline points rendered dynamically -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-close="trackerModal">Close Tracker</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Add Bus Route -->
+  <div id="busModal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Add New Bus Route</h3>
+        <button class="modal-close" data-close="busModal">&times;</button>
+      </div>
+      <form id="busForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="formBusNo">Bus Registration Number <span class="required">*</span></label>
+            <input type="text" id="formBusNo" class="form-input" placeholder="e.g. TN-20-CZ-1005" required>
+          </div>
+          <div class="form-group">
+            <label for="formRouteName">Route Description <span class="required">*</span></label>
+            <input type="text" id="formRouteName" class="form-input" placeholder="e.g. Redhills → PEC Campus" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formDriver">Driver Name</label>
+              <input type="text" id="formDriver" class="form-input" placeholder="e.g. Rajendran P" required>
+            </div>
+            <div class="form-group">
+              <label for="formPhone">Driver Contact</label>
+              <input type="tel" id="formPhone" class="form-input" placeholder="e.g. 9840112288" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formStartTime">Departure Time</label>
+              <input type="text" id="formStartTime" class="form-input" value="06:45 AM" required>
+            </div>
+            <div class="form-group">
+              <label for="formCapacity">Seating Capacity</label>
+              <input type="number" id="formCapacity" class="form-input" value="55" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="formStopsText">Stops (Comma Separated)</label>
+            <input type="text" id="formStopsText" class="form-input" placeholder="Redhills, Padi, Maduravoyal, Campus" value="Redhills, Padi, Maduravoyal, PEC Campus" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="busModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Bus Route</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>&copy; 2026 Prathyusha Engineering College &mdash; Transport Management. Web Technologies Academic Project. Designed by Yuvathilagan.</p>
+  </footer>
+
+  <script src="src/js/app.js"></script>
+</body>
+</html>

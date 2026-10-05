@@ -1,0 +1,107 @@
+{
+  "institution": "Prathyusha Engineering College - Transport Department",
+  "busStatuses": ["Not Started", "On Route", "At College", "Completed"],
+  "buses": [
+    {
+      "busNumber": "TN-20-CZ-1001",
+      "routeId": "R-01",
+      "routeName": "Tambaram → PEC Campus",
+      "driverName": "Murugan S",
+      "driverPhone": "9840112244",
+      "capacity": 55,
+      "startTime": "06:45 AM",
+      "currentStatus": "On Route",
+      "currentStopIndex": 2,
+      "stops": [
+        { "name": "Tambaram Sanatorium", "time": "06:45 AM" },
+        { "name": "Chromepet", "time": "07:00 AM" },
+        { "name": "Pallavaram", "time": "07:15 AM" },
+        { "name": "Guindy", "time": "07:35 AM" },
+        { "name": "Poonamallee Bypass", "time": "08:05 AM" },
+        { "name": "PEC Campus", "time": "08:30 AM" }
+      ]
+    },
+    {
+      "busNumber": "TN-20-CZ-1002",
+      "routeId": "R-02",
+      "routeName": "Avadi → PEC Campus",
+      "driverName": "Suresh Kumar P",
+      "driverPhone": "9840112255",
+      "capacity": 55,
+      "startTime": "07:00 AM",
+      "currentStatus": "At College",
+      "currentStopIndex": 4,
+      "stops": [
+        { "name": "Avadi Bus Terminus", "time": "07:00 AM" },
+        { "name": "Thirumullaivoyal", "time": "07:15 AM" },
+        { "name": "Ambattur OT", "time": "07:30 AM" },
+        { "name": "Thiruninravur", "time": "07:55 AM" },
+        { "name": "PEC Campus", "time": "08:25 AM" }
+      ]
+    },
+    {
+      "busNumber": "TN-20-CZ-1003",
+      "routeId": "R-03",
+      "routeName": "Koyambedu → PEC Campus",
+      "driverName": "Kaliappan R",
+      "driverPhone": "9840112266",
+      "capacity": 55,
+      "startTime": "07:10 AM",
+      "currentStatus": "Not Started",
+      "currentStopIndex": 0,
+      "stops": [
+        { "name": "Koyambedu CMBT", "time": "07:10 AM" },
+        { "name": "Nerkundram", "time": "07:20 AM" },
+        { "name": "Maduravoyal", "time": "07:35 AM" },
+        { "name": "Vanagaram", "time": "07:45 AM" },
+        { "name": "PEC Campus", "time": "08:30 AM" }
+      ]
+    },
+    {
+      "busNumber": "TN-20-CZ-1004",
+      "routeId": "R-04",
+      "routeName": "Kanchipuram → PEC Campus",
+      "driverName": "Dhanasekar M",
+      "driverPhone": "9840112277",
+      "capacity": 50,
+      "startTime": "06:30 AM",
+      "currentStatus": "Completed",
+      "currentStopIndex": 4,
+      "stops": [
+        { "name": "Kanchipuram Bus Stand", "time": "06:30 AM" },
+        { "name": "Walajabad", "time": "07:00 AM" },
+        { "name": "Sunguvarchatram", "time": "07:35 AM" },
+        { "name": "Sriperumbudur", "time": "07:55 AM" },
+        { "name": "PEC Campus", "time": "08:30 AM" }
+      ]
+    }
+  ],
+  "passes": [
+    {
+      "passId": "BPASS-9001",
+      "studentName": "Yuvathilagan M",
+      "studentId": "PEC2023CS001",
+      "department": "Computer Science and Engineering",
+      "phone": "9876543210",
+      "busNumber": "TN-20-CZ-1001",
+      "route": "Tambaram → PEC Campus",
+      "boardingStop": "Chromepet",
+      "issueDate": "2026-06-01",
+      "validUntil": "2026-12-31",
+      "status": "Valid"
+    },
+    {
+      "passId": "BPASS-9002",
+      "studentName": "Kavitha R",
+      "studentId": "PEC2023CS002",
+      "department": "Computer Science and Engineering",
+      "phone": "9876543211",
+      "busNumber": "TN-20-CZ-1002",
+      "route": "Avadi → PEC Campus",
+      "boardingStop": "Ambattur OT",
+      "issueDate": "2026-06-01",
+      "validUntil": "2026-12-31",
+      "status": "Valid"
+    }
+  ]
+}

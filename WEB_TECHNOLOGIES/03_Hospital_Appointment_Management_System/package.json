@@ -1,0 +1,18 @@
+{
+  "name": "hospital-appointment-management-system",
+  "version": "1.0.0",
+  "description": "Hospital Appointment Management System for Web Technologies Academic Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/test.js"
+  },
+  "keywords": [
+    "web-technologies",
+    "hospital-appointment",
+    "slot-booking",
+    "double-booking-prevention"
+  ],
+  "author": "Yuvathilagan",
+  "license": "MIT"
+}

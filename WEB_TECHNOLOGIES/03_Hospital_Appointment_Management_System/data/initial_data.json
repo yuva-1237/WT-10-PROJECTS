@@ -1,0 +1,117 @@
+{
+  "hospitalName": "Prathyusha Multi-Speciality Health Center",
+  "specializations": [
+    "Cardiology",
+    "Orthopedics",
+    "Pediatrics",
+    "Neurology",
+    "General Medicine",
+    "Dermatology"
+  ],
+  "timeSlots": [
+    "09:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 PM",
+    "02:00 PM",
+    "03:00 PM",
+    "04:00 PM",
+    "05:00 PM"
+  ],
+  "doctors": [
+    {
+      "id": "DOC001",
+      "name": "Dr. Rajesh Varma, MD, DM",
+      "specialization": "Cardiology",
+      "experience": "14 Years",
+      "availableDays": ["Monday", "Wednesday", "Friday"],
+      "availableTime": "09:00 AM - 01:00 PM",
+      "room": "Consultation Suite 101",
+      "fee": 600
+    },
+    {
+      "id": "DOC002",
+      "name": "Dr. Priya Sundaram, MS (Ortho)",
+      "specialization": "Orthopedics",
+      "experience": "11 Years",
+      "availableDays": ["Tuesday", "Thursday", "Saturday"],
+      "availableTime": "10:00 AM - 02:00 PM",
+      "room": "Bone & Joint Clinic 104",
+      "fee": 500
+    },
+    {
+      "id": "DOC003",
+      "name": "Dr. Arvind Swaminathan, MD (Peds)",
+      "specialization": "Pediatrics",
+      "experience": "9 Years",
+      "availableDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "availableTime": "09:00 AM - 01:00 PM",
+      "room": "Child Care Wing 202",
+      "fee": 450
+    },
+    {
+      "id": "DOC004",
+      "name": "Dr. Malini Raman, DM (Neuro)",
+      "specialization": "Neurology",
+      "experience": "16 Years",
+      "availableDays": ["Monday", "Thursday"],
+      "availableTime": "02:00 PM - 05:00 PM",
+      "room": "Neuro Science Block 301",
+      "fee": 750
+    },
+    {
+      "id": "DOC005",
+      "name": "Dr. Karthikeyan S, MBBS, MD",
+      "specialization": "General Medicine",
+      "experience": "8 Years",
+      "availableDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "availableTime": "09:00 AM - 05:00 PM",
+      "room": "OPD Block Room 12",
+      "fee": 350
+    },
+    {
+      "id": "DOC006",
+      "name": "Dr. Ananya Reddy, MD (Derm)",
+      "specialization": "Dermatology",
+      "experience": "7 Years",
+      "availableDays": ["Wednesday", "Friday", "Saturday"],
+      "availableTime": "11:00 AM - 04:00 PM",
+      "room": "Skin & Aesthetic Care 205",
+      "fee": 500
+    }
+  ],
+  "appointments": [
+    {
+      "id": "APT-1001",
+      "patientName": "Yuvathilagan M",
+      "patientEmail": "yuva.patient@gmail.com",
+      "patientPhone": "9876543210",
+      "patientAge": 21,
+      "patientGender": "Male",
+      "doctorId": "DOC001",
+      "doctorName": "Dr. Rajesh Varma, MD, DM",
+      "specialization": "Cardiology",
+      "date": "2026-10-12",
+      "time": "09:00 AM",
+      "reason": "Routine cardiac checkup and ECG consultation",
+      "status": "Booked",
+      "createdAt": "2026-10-05T08:00:00.000Z"
+    },
+    {
+      "id": "APT-1002",
+      "patientName": "Kavitha Ramesh",
+      "patientEmail": "kavitha.r@gmail.com",
+      "patientPhone": "9876543211",
+      "patientAge": 28,
+      "patientGender": "Female",
+      "doctorId": "DOC002",
+      "doctorName": "Dr. Priya Sundaram, MS (Ortho)",
+      "specialization": "Orthopedics",
+      "date": "2026-10-13",
+      "time": "10:00 AM",
+      "reason": "Knee ligament pain consultation",
+      "status": "Booked",
+      "createdAt": "2026-10-05T08:30:00.000Z"
+    }
+  ]
+}

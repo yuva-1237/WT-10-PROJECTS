@@ -1,0 +1,18 @@
+{
+  "name": "digital-library-management-system",
+  "version": "1.0.0",
+  "description": "Digital Library Management System for Web Technologies Academic Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/test.js"
+  },
+  "keywords": [
+    "web-technologies",
+    "digital-library",
+    "dynamic-fine-calculator",
+    "book-issue-return"
+  ],
+  "author": "Yuvathilagan",
+  "license": "MIT"
+}

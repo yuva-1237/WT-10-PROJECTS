@@ -1,0 +1,221 @@
+{
+  "hostelName": "Prathyusha Engineering College - Kaveri & Bhavani Residences",
+  "rooms": [
+    {
+      "roomNo": "101",
+      "block": "Block A (Boys)",
+      "floor": "1st Floor",
+      "capacity": 3,
+      "occupied": 3,
+      "available": 0,
+      "amenities": "Attached Bath, Wi-Fi, Balcony"
+    },
+    {
+      "roomNo": "102",
+      "block": "Block A (Boys)",
+      "floor": "1st Floor",
+      "capacity": 3,
+      "occupied": 2,
+      "available": 1,
+      "amenities": "Attached Bath, Wi-Fi, Study Table"
+    },
+    {
+      "roomNo": "201",
+      "block": "Block A (Boys)",
+      "floor": "2nd Floor",
+      "capacity": 4,
+      "occupied": 2,
+      "available": 2,
+      "amenities": "Balcony, Air Cooler, Wi-Fi"
+    },
+    {
+      "roomNo": "202",
+      "block": "Block A (Boys)",
+      "floor": "2nd Floor",
+      "capacity": 2,
+      "occupied": 0,
+      "available": 2,
+      "amenities": "Study Table, Wardrobes, Wi-Fi"
+    },
+    {
+      "roomNo": "105",
+      "block": "Block B (Girls)",
+      "floor": "1st Floor",
+      "capacity": 3,
+      "occupied": 1,
+      "available": 2,
+      "amenities": "Attached Bath, Security Intercom, Wi-Fi"
+    }
+  ],
+  "students": [
+    {
+      "studentId": "PEC2023CS001",
+      "name": "Yuvathilagan M",
+      "department": "Computer Science and Engineering",
+      "year": "3rd Year",
+      "gender": "Male",
+      "roomNo": "101",
+      "block": "Block A (Boys)",
+      "bedNo": "Bed 1",
+      "phone": "9876543210",
+      "parentPhone": "9876543299",
+      "email": "yuva.pec@gmail.com",
+      "feeStatus": "Paid",
+      "feeAmount": 65000,
+      "feePaid": 65000
+    },
+    {
+      "studentId": "PEC2023CS004",
+      "name": "Rajesh K",
+      "department": "Computer Science and Engineering",
+      "year": "3rd Year",
+      "gender": "Male",
+      "roomNo": "101",
+      "block": "Block A (Boys)",
+      "bedNo": "Bed 2",
+      "phone": "9876543214",
+      "parentPhone": "9876543298",
+      "email": "rajesh.k@gmail.com",
+      "feeStatus": "Paid",
+      "feeAmount": 65000,
+      "feePaid": 65000
+    },
+    {
+      "studentId": "PEC2023IT012",
+      "name": "Sanjay Kumar",
+      "department": "Information Technology",
+      "year": "3rd Year",
+      "gender": "Male",
+      "roomNo": "101",
+      "block": "Block A (Boys)",
+      "bedNo": "Bed 3",
+      "phone": "9876543212",
+      "parentPhone": "9876543297",
+      "email": "sanjay.it@gmail.com",
+      "feeStatus": "Partial",
+      "feeAmount": 65000,
+      "feePaid": 40000
+    },
+    {
+      "studentId": "PEC2023CS019",
+      "name": "Arun V",
+      "department": "Computer Science and Engineering",
+      "year": "3rd Year",
+      "gender": "Male",
+      "roomNo": "102",
+      "block": "Block A (Boys)",
+      "bedNo": "Bed 1",
+      "phone": "9876543219",
+      "parentPhone": "9876543296",
+      "email": "arun.v@gmail.com",
+      "feeStatus": "Paid",
+      "feeAmount": 65000,
+      "feePaid": 65000
+    },
+    {
+      "studentId": "PEC2023EC008",
+      "name": "Dinesh M",
+      "department": "Electronics and Communication Engineering",
+      "year": "2nd Year",
+      "gender": "Male",
+      "roomNo": "102",
+      "block": "Block A (Boys)",
+      "bedNo": "Bed 2",
+      "phone": "9876543208",
+      "parentPhone": "9876543295",
+      "email": "dinesh.ec@gmail.com",
+      "feeStatus": "Pending",
+      "feeAmount": 65000,
+      "feePaid": 0
+    },
+    {
+      "studentId": "PEC2024CS033",
+      "name": "Karthik S",
+      "department": "Computer Science and Engineering",
+      "year": "2nd Year",
+      "gender": "Male",
+      "roomNo": "Unallocated",
+      "block": "None",
+      "bedNo": "None",
+      "phone": "9876543233",
+      "parentPhone": "9876543294",
+      "email": "karthik.s@gmail.com",
+      "feeStatus": "Pending",
+      "feeAmount": 65000,
+      "feePaid": 0
+    }
+  ],
+  "leaveRequests": [
+    {
+      "id": "LEV-501",
+      "studentId": "PEC2023CS001",
+      "studentName": "Yuvathilagan M",
+      "roomNo": "101",
+      "reason": "Home visit for family festival and ancestral rituals",
+      "fromDate": "2026-10-12",
+      "toDate": "2026-10-16",
+      "parentApproved": true,
+      "status": "Pending",
+      "submittedOn": "2026-10-04T10:00:00.000Z",
+      "remarks": ""
+    },
+    {
+      "id": "LEV-502",
+      "studentId": "PEC2023CS019",
+      "studentName": "Arun V",
+      "roomNo": "102",
+      "reason": "Orthopedic consultation and medical review",
+      "fromDate": "2026-10-06",
+      "toDate": "2026-10-08",
+      "parentApproved": true,
+      "status": "Approved",
+      "submittedOn": "2026-10-03T15:20:00.000Z",
+      "remarks": "Approved with parental consent verification"
+    },
+    {
+      "id": "LEV-503",
+      "studentId": "PEC2023IT012",
+      "studentName": "Sanjay Kumar",
+      "roomNo": "101",
+      "reason": "Weekend outing with classmates",
+      "fromDate": "2026-10-05",
+      "toDate": "2026-10-05",
+      "parentApproved": false,
+      "status": "Rejected",
+      "submittedOn": "2026-10-03T18:00:00.000Z",
+      "remarks": "Day outing rejected due to upcoming mid-semester examinations"
+    }
+  ],
+  "complaints": [
+    {
+      "id": "CMP-701",
+      "studentId": "PEC2023CS001",
+      "studentName": "Yuvathilagan M",
+      "roomNo": "101",
+      "category": "Electricity",
+      "description": "Ceiling fan regulator stuck at low speed in Room 101.",
+      "submittedOn": "2026-10-03T09:15:00.000Z",
+      "status": "In Progress"
+    },
+    {
+      "id": "CMP-702",
+      "studentId": "PEC2023EC008",
+      "studentName": "Dinesh M",
+      "roomNo": "102",
+      "category": "Plumbing",
+      "description": "Bathroom washbasin drain pipe is leaking water onto floor.",
+      "submittedOn": "2026-10-04T11:45:00.000Z",
+      "status": "Submitted"
+    },
+    {
+      "id": "CMP-703",
+      "studentId": "PEC2023CS004",
+      "studentName": "Rajesh K",
+      "roomNo": "101",
+      "category": "Wi-Fi",
+      "description": "Wi-Fi access point in 1st floor corridor unstable during evening hours.",
+      "submittedOn": "2026-10-01T16:00:00.000Z",
+      "status": "Resolved"
+    }
+  ]
+}

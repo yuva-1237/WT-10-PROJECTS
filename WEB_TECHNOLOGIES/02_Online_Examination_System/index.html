@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Examination Portal | Web Technologies</title>
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+  <!-- Global Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <span class="brand-icon">📝</span>
+        <div>
+          <h1 id="examTitleHeader">Online Examination System</h1>
+          <p class="sub-brand">Department of Computer Science and Engineering</p>
+        </div>
+      </div>
+      <div class="header-controls">
+        <div id="examTimerBadge" class="timer-badge hidden">
+          ⏱️ Time Left: <span id="timerDisplay">10:00</span>
+        </div>
+        <select id="roleSwitch" class="form-select">
+          <option value="student">Student Examination</option>
+          <option value="admin">Exam Controller / Admin</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- STAGE 1: CANDIDATE LOGIN & INSTRUCTIONS -->
+    <section id="loginStage" class="stage-view">
+      <div class="instructions-card card">
+        <div class="card-header">
+          <h2>Candidate Registration & Instructions</h2>
+        </div>
+        <div class="instructions-body">
+          <div class="alert alert-info">
+            <h3>Examination Rules:</h3>
+            <ul id="instructionsList">
+              <!-- Populated by JS -->
+            </ul>
+          </div>
+
+          <form id="candidateForm" class="candidate-form">
+            <div class="form-group">
+              <label for="candRegNo">Student Registration Number <span class="required">*</span></label>
+              <input type="text" id="candRegNo" class="form-input" placeholder="e.g. PEC2023CS001" value="PEC2023CS001" required>
+            </div>
+            <div class="form-group">
+              <label for="candName">Full Candidate Name <span class="required">*</span></label>
+              <input type="text" id="candName" class="form-input" placeholder="e.g. Yuvathilagan M" value="Yuvathilagan M" required>
+            </div>
+            <div class="form-group">
+              <label for="candDept">Department</label>
+              <select id="candDept" class="form-select">
+                <option value="CSE">Computer Science and Engineering</option>
+                <option value="IT">Information Technology</option>
+                <option value="CSBS">Computer Science and Business Systems</option>
+                <option value="ECE">Electronics and Communication</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Start Examination Now →</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 2: LIVE EXAM ARENA -->
+    <section id="examStage" class="stage-view hidden">
+      <div class="exam-layout">
+        <!-- Question Pane -->
+        <div class="question-pane card">
+          <div class="question-header">
+            <div>
+              <span class="badge badge-primary" id="qCurrentBadge">Question 1</span>
+              <span class="sub-text" id="qTotalCountBadge">of 8 Questions</span>
+            </div>
+            <button id="btnFlagReview" class="btn btn-outline btn-sm">🚩 Mark for Review</button>
+          </div>
+
+          <div class="question-body">
+            <h3 id="questionText" class="question-text">Loading question...</h3>
+            <div id="optionsContainer" class="options-container">
+              <!-- Options rendered dynamically -->
+            </div>
+          </div>
+
+          <div class="question-footer">
+            <div class="nav-left">
+              <button id="btnPrev" class="btn btn-outline">← Previous</button>
+              <button id="btnClearAnswer" class="btn btn-outline">Clear Response</button>
+            </div>
+            <div class="nav-right">
+              <button id="btnNext" class="btn btn-primary">Next →</button>
+              <button id="btnSubmitExam" class="btn btn-success">Finish & Submit Exam</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Palette & Status Sidebar -->
+        <aside class="palette-pane card">
+          <h3>Question Palette</h3>
+          <div class="candidate-mini-info">
+            <span id="examCandName">Candidate</span> (<span id="examCandId">ID</span>)
+          </div>
+
+          <div id="paletteGrid" class="palette-grid">
+            <!-- Palette numbers rendered dynamically -->
+          </div>
+
+          <div class="palette-legend">
+            <div class="legend-item"><span class="palette-dot answered"></span> Answered</div>
+            <div class="legend-item"><span class="palette-dot flagged"></span> Marked for Review</div>
+            <div class="legend-item"><span class="palette-dot unanswered"></span> Unattempted</div>
+          </div>
+
+          <div class="exam-summary-stats">
+            <div>Answered: <strong id="summaryAnswered">0</strong></div>
+            <div>Remaining: <strong id="summaryRemaining">0</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- STAGE 3: RESULT & REVIEW PAGE -->
+    <section id="resultStage" class="stage-view hidden">
+      <div class="card result-card">
+        <div class="result-header">
+          <div class="result-status-badge" id="resStatusBadge">PASS</div>
+          <h2>Examination Performance Report</h2>
+          <p id="resCandDetails" class="sub-text">Candidate Name (Reg No) | Department</p>
+        </div>
+
+        <div class="result-metrics-grid">
+          <div class="metric-box">
+            <div class="metric-num" id="resScore">0%</div>
+            <div class="metric-label">Percentage Score</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-num" id="resCorrect">0</div>
+            <div class="metric-label">Correct Answers</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-num" id="resIncorrect">0</div>
+            <div class="metric-label">Incorrect Answers</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-num" id="resAttempted">0</div>
+            <div class="metric-label">Total Attempted</div>
+          </div>
+        </div>
+
+        <div class="review-section">
+          <h3>Detailed Question Review & Answer Key</h3>
+          <div id="reviewContainer" class="review-container">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <div class="result-footer-actions">
+          <button id="btnRetake" class="btn btn-primary">Take Exam Again</button>
+          <button onclick="window.print()" class="btn btn-secondary">🖨️ Print Scorecard</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN PANEL -->
+    <section id="adminStage" class="stage-view hidden">
+      <div class="card">
+        <div class="admin-top-bar">
+          <div>
+            <h2>Question Bank & Exam Configuration</h2>
+            <p class="sub-text">Manage questions, choices, answer keys, and timer settings.</p>
+          </div>
+          <button id="btnAddQuestion" class="btn btn-primary">+ Add New Question</button>
+        </div>
+
+        <div class="exam-settings-box">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="settingDuration">Exam Duration (Minutes):</label>
+              <input type="number" id="settingDuration" class="form-input" min="1" max="180" style="width: 120px;">
+            </div>
+            <div class="form-group">
+              <label for="settingPassPercent">Pass Threshold (%):</label>
+              <input type="number" id="settingPassPercent" class="form-input" min="10" max="90" style="width: 120px;">
+            </div>
+            <div class="form-group" style="align-self: flex-end;">
+              <button id="btnSaveSettings" class="btn btn-secondary">Save Exam Configuration</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th>Question</th>
+                <th>Options</th>
+                <th>Correct Answer</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminQuestionsTbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Add/Edit Question -->
+  <div id="questionModal" class="modal-overlay hidden">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3 id="modalQTitle">Add Question</h3>
+        <button class="modal-close" data-close="questionModal">&times;</button>
+      </div>
+      <form id="questionForm">
+        <div class="modal-body">
+          <input type="hidden" id="formQId">
+          <div class="form-group">
+            <label for="formQText">Question Statement <span class="required">*</span></label>
+            <textarea id="formQText" class="form-input" rows="3" placeholder="Enter question..." required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formOpt0">Option A <span class="required">*</span></label>
+              <input type="text" id="formOpt0" class="form-input" placeholder="Option A text" required>
+            </div>
+            <div class="form-group">
+              <label for="formOpt1">Option B <span class="required">*</span></label>
+              <input type="text" id="formOpt1" class="form-input" placeholder="Option B text" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formOpt2">Option C <span class="required">*</span></label>
+              <input type="text" id="formOpt2" class="form-input" placeholder="Option C text" required>
+            </div>
+            <div class="form-group">
+              <label for="formOpt3">Option D <span class="required">*</span></label>
+              <input type="text" id="formOpt3" class="form-input" placeholder="Option D text" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formCorrect">Correct Option <span class="required">*</span></label>
+              <select id="formCorrect" class="form-select" required>
+                <option value="0">Option A</option>
+                <option value="1">Option B</option>
+                <option value="2">Option C</option>
+                <option value="3">Option D</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="formExplanation">Explanation / Solution Reference</label>
+              <input type="text" id="formExplanation" class="form-input" placeholder="Why this option is correct...">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="questionModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Question</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>&copy; 2026 Online Examination System &mdash; Web Technologies Academic Project. Designed by Yuvathilagan.</p>
+  </footer>
+
+  <script src="src/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+{
+  "examConfig": {
+    "title": "CS3401 - Web Technologies Mid-Semester Online Examination",
+    "durationMinutes": 10,
+    "passPercentage": 50,
+    "instructions": [
+      "Each question carries equal marks (1 mark each).",
+      "No negative marking for incorrect answers.",
+      "The examination will submit automatically once the countdown timer reaches 00:00.",
+      "Use the Question Palette on the right to navigate directly to any question.",
+      "You can mark questions for review and return to them prior to final submission."
+    ]
+  },
+  "questions": [
+    {
+      "id": 1,
+      "text": "What does HTML stand for?",
+      "options": [
+        "Hyper Text Markup Language",
+        "High Text Machine Language",
+        "Hyperlink Text Management Language",
+        "Home Tool Markup Language"
+      ],
+      "correct": 0,
+      "explanation": "HTML stands for HyperText Markup Language, the standard markup language for creating web documents."
+    },
+    {
+      "id": 2,
+      "text": "Which CSS property is used to control the spacing between adjacent elements outside the border?",
+      "options": [
+        "padding",
+        "margin",
+        "border-spacing",
+        "gap"
+      ],
+      "correct": 1,
+      "explanation": "Margin creates space around an element's border, whereas padding creates space inside the border."
+    },
+    {
+      "id": 3,
+      "text": "Which JavaScript method is used to attach an event handler to a DOM element without overwriting existing event handlers?",
+      "options": [
+        "element.attachEvent()",
+        "element.addEventListener()",
+        "element.setHandler()",
+        "element.bind()"
+      ],
+      "correct": 1,
+      "explanation": "addEventListener() adds an event listener to a target DOM node without overwriting any previous listeners."
+    },
+    {
+      "id": 4,
+      "text": "In JavaScript, what will the expression `typeof null` evaluate to?",
+      "options": [
+        "'null'",
+        "'undefined'",
+        "'object'",
+        "'boolean'"
+      ],
+      "correct": 2,
+      "explanation": "Due to a historic bug in the original JavaScript implementation preserved for backward compatibility, typeof null returns 'object'."
+    },
+    {
+      "id": 5,
+      "text": "Which HTML5 semantic element represents an independent, self-contained piece of content that could be distributed on its own?",
+      "options": [
+        "<section>",
+        "<aside>",
+        "<article>",
+        "<div>"
+      ],
+      "correct": 2,
+      "explanation": "The <article> tag specifies independent, self-contained content such as blog posts or news articles."
+    },
+    {
+      "id": 6,
+      "text": "What does JSON stand for in web application development?",
+      "options": [
+        "JavaScript Object Notation",
+        "Java Standard Output Network",
+        "JavaScript Oriented Networking",
+        "Joint System Object Node"
+      ],
+      "correct": 0,
+      "explanation": "JSON stands for JavaScript Object Notation, a lightweight data-interchange text format."
+    },
+    {
+      "id": 7,
+      "text": "Which Web Storage mechanism stores data with NO expiration date across browser sessions?",
+      "options": [
+        "sessionStorage",
+        "localStorage",
+        "cookie",
+        "memoryCache"
+      ],
+      "correct": 1,
+      "explanation": "localStorage stores data persistently until explicitly cleared by the user or code."
+    },
+    {
+      "id": 8,
+      "text": "Which HTTP status code indicates a successful resource creation on the server?",
+      "options": [
+        "200 OK",
+        "201 Created",
+        "204 No Content",
+        "304 Not Modified"
+      ],
+      "correct": 1,
+      "explanation": "HTTP status 201 Created indicates that the request has succeeded and led to the creation of a resource."
+    }
+  ]
+}

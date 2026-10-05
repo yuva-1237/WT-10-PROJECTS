@@ -1,0 +1,103 @@
+{
+  "institution": "Prathyusha Engineering College - Student Affairs & Cultural Council",
+  "categories": [
+    "Technical",
+    "Cultural",
+    "Sports",
+    "Workshop",
+    "Seminar"
+  ],
+  "events": [
+    {
+      "id": "EVT-201",
+      "name": "HackPEC 2026: 24-Hour National Hackathon",
+      "description": "Annual 24-hour national hackathon focused on AI, Web3, and Sustainable Tech solutions. Cash prizes worth ₹1,00,000!",
+      "date": "2026-11-12",
+      "time": "09:00 AM - Next Day 09:00 AM",
+      "venue": "Campus Innovation Hub & Seminar Hall 1",
+      "category": "Technical",
+      "maxParticipants": 60,
+      "deadline": "2026-11-05",
+      "posterIcon": "💻",
+      "coordinators": "Dr. Ramesh (Faculty) / Yuva (Student)"
+    },
+    {
+      "id": "EVT-202",
+      "name": "PrathyuUtsav: Annual Inter-College Cultural Fest",
+      "description": "The flagship cultural extravaganza featuring western music bands, classical dance battles, fashion parade, and live DJ night.",
+      "date": "2026-11-25",
+      "time": "10:00 AM - 08:00 PM",
+      "venue": "Open Air Auditorium (OAA)",
+      "category": "Cultural",
+      "maxParticipants": 150,
+      "deadline": "2026-11-18",
+      "posterIcon": "🎭",
+      "coordinators": "Cultural Council Team"
+    },
+    {
+      "id": "EVT-203",
+      "name": "Hands-on Workshop: Modern Web Apps with Node & Express",
+      "description": "Comprehensive practical masterclass on full-stack web applications, database connectivity, and REST API deployment.",
+      "date": "2026-10-28",
+      "time": "09:30 AM - 04:30 PM",
+      "venue": "IT Computing Lab 2",
+      "category": "Workshop",
+      "maxParticipants": 40,
+      "deadline": "2026-10-24",
+      "posterIcon": "⚙️",
+      "coordinators": "CSE Department Association"
+    },
+    {
+      "id": "EVT-204",
+      "name": "Inter-Department Cricket Tournament",
+      "description": "T20 Knockout tournament across all academic departments. League matches followed by championship finals under floodlights.",
+      "date": "2026-11-02",
+      "time": "08:00 AM - 05:00 PM",
+      "venue": "College Sports Ground",
+      "category": "Sports",
+      "maxParticipants": 80,
+      "deadline": "2026-10-29",
+      "posterIcon": "🏏",
+      "coordinators": "Physical Education Department"
+    },
+    {
+      "id": "EVT-205",
+      "name": "Expert Seminar: Career Pathways in Cloud & AI Architecture",
+      "description": "Distinguished guest lecture by enterprise cloud architects from Amazon AWS and Microsoft Azure.",
+      "date": "2026-10-20",
+      "time": "02:00 PM - 04:30 PM",
+      "venue": "Main Auditorium",
+      "category": "Seminar",
+      "maxParticipants": 100,
+      "deadline": "2026-10-18",
+      "posterIcon": "🎤",
+      "coordinators": "Placement & Career Cell"
+    }
+  ],
+  "registrations": [
+    {
+      "regId": "REG-EVT-7701",
+      "eventId": "EVT-201",
+      "eventName": "HackPEC 2026: 24-Hour National Hackathon",
+      "studentId": "PEC2023CS001",
+      "studentName": "Yuvathilagan M",
+      "email": "yuva.pec@gmail.com",
+      "phone": "9876543210",
+      "department": "Computer Science and Engineering",
+      "registeredDate": "2026-10-02T10:00:00.000Z",
+      "status": "Confirmed"
+    },
+    {
+      "regId": "REG-EVT-7702",
+      "eventId": "EVT-203",
+      "eventName": "Hands-on Workshop: Modern Web Apps with Node & Express",
+      "studentId": "PEC2023CS002",
+      "studentName": "Kavitha R",
+      "email": "kavitha.r@gmail.com",
+      "phone": "9876543211",
+      "department": "Computer Science and Engineering",
+      "registeredDate": "2026-10-03T14:30:00.000Z",
+      "status": "Confirmed"
+    }
+  ]
+}

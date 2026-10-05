@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Library Management System | Prathyusha Central Library</title>
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">📖</div>
+        <div>
+          <h1>Prathyusha Central Digital Library</h1>
+          <p class="sub-brand">Circulation, Cataloging & Dynamic Overdue Fine Calculator</p>
+        </div>
+      </div>
+      <div class="role-selector">
+        <label for="portalRoleSwitch"><strong>Active Portal:</strong></label>
+        <select id="portalRoleSwitch" class="form-select">
+          <option value="student">Student Member Portal</option>
+          <option value="librarian">Librarian / Administrator</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- STUDENT VIEW -->
+    <section id="studentView" class="portal-view">
+      <div class="student-bar card">
+        <div class="flex-between">
+          <div>
+            <strong>Active Student Member:</strong>
+            <select id="studentUserSelect" class="form-select" style="display:inline-block; width: auto; margin-left: 0.5rem;">
+              <option value="PEC2023CS001">PEC2023CS001 - Yuvathilagan M (CSE)</option>
+              <option value="PEC2023CS002">PEC2023CS002 - Kavitha R (CSE)</option>
+              <option value="PEC2023IT003">PEC2023IT003 - Dinesh Kumar S (IT)</option>
+            </select>
+          </div>
+          <div>
+            <span class="fine-rate-badge">Standard Loan: 14 Days | Fine Rate: ₹5 / Overdue Day</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="tabCatalog">📚 Search & Browse Catalog</button>
+        <button class="tab-btn" data-tab="tabIssued">📑 My Borrowed Books & Returns</button>
+      </div>
+
+      <!-- Tab 1: Book Catalog -->
+      <div id="tabCatalog" class="tab-content active">
+        <div class="filter-bar card">
+          <div class="search-box">
+            <input type="text" id="bookSearchInput" class="form-input" placeholder="Search by Title, Author, or ISBN...">
+          </div>
+          <div class="filter-box">
+            <select id="categoryFilter" class="form-select">
+              <option value="">All Categories</option>
+            </select>
+          </div>
+          <span id="catalogCountBadge" class="badge badge-info">0 Books Cataloged</span>
+        </div>
+
+        <div id="booksGrid" class="books-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Tab 2: My Borrowed Books -->
+      <div id="tabIssued" class="tab-content hidden">
+        <div class="card">
+          <div class="table-header">
+            <h2>Currently Borrowed Volumes & Loan History</h2>
+            <span id="myIssuedBadge" class="badge badge-primary">0 Active Loans</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Issue ID</th>
+                  <th>Book Title</th>
+                  <th>Issue Date</th>
+                  <th>Due Date</th>
+                  <th>Overdue Status</th>
+                  <th>Fine (₹5/day)</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="myLoansTbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIBRARIAN / ADMIN VIEW -->
+    <section id="librarianView" class="portal-view hidden">
+      <!-- KPI Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📚</div>
+          <div>
+            <div class="stat-value" id="kpiTotalTitles">0</div>
+            <div class="stat-label">Cataloged Titles</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📦</div>
+          <div>
+            <div class="stat-value" id="kpiTotalCopies">0</div>
+            <div class="stat-label">Total Inventory Copies</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📤</div>
+          <div>
+            <div class="stat-value" id="kpiActiveLoans">0</div>
+            <div class="stat-label">Currently Issued Books</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">💰</div>
+          <div>
+            <div class="stat-value" id="kpiFinesCollected">₹0</div>
+            <div class="stat-label">Fines Collected</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Catalog Management -->
+      <div class="card">
+        <div class="admin-top-bar">
+          <h2>Master Catalog Management</h2>
+          <div class="btn-group">
+            <button id="btnAddBook" class="btn btn-primary">+ Add New Book</button>
+            <button id="btnResetLibrary" class="btn btn-outline">↺ Reset Sample Books</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Book ID</th>
+                <th>Title & Author</th>
+                <th>Category</th>
+                <th>ISBN</th>
+                <th>Shelf</th>
+                <th>Total</th>
+                <th>Available</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminBooksTbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Master Circulation Ledger -->
+      <div class="card">
+        <h2>Master Circulation Ledger (Issues & Returns)</h2>
+        <div class="table-responsive" style="margin-top:1rem;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Issue ID</th>
+                <th>Book Title</th>
+                <th>Student ID & Name</th>
+                <th>Issue Date</th>
+                <th>Due Date</th>
+                <th>Return Date</th>
+                <th>Fine Paid</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="adminCirculationTbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Issue Book -->
+  <div id="issueModal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3>Issue Book to Student</h3>
+          <p id="issueBookTitleSub" class="sub-text">Book Title</p>
+        </div>
+        <button class="modal-close" data-close="issueModal">&times;</button>
+      </div>
+      <form id="issueForm">
+        <div class="modal-body">
+          <input type="hidden" id="issueBookId">
+          <div class="form-group">
+            <label for="issueStudentName">Borrowing Student</label>
+            <input type="text" id="issueStudentName" class="form-input" readonly>
+          </div>
+          <div class="form-group">
+            <label for="issueStudentId">Student ID</label>
+            <input type="text" id="issueStudentId" class="form-input" readonly>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="issueDate">Issue Date</label>
+              <input type="date" id="issueDate" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="dueDate">Due Date (14 Days Standard)</label>
+              <input type="date" id="dueDate" class="form-input" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="issueModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Book Issue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Return Book & Dynamic Fine Calculation -->
+  <div id="returnModal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3>Return Book & Fine Calculation</h3>
+          <p id="returnBookTitleSub" class="sub-text">Book Title</p>
+        </div>
+        <button class="modal-close" data-close="returnModal">&times;</button>
+      </div>
+      <form id="returnForm">
+        <div class="modal-body">
+          <input type="hidden" id="returnIssueId">
+          <div class="alert alert-info" style="margin-bottom:1rem;">
+            <div><strong>Due Date:</strong> <span id="calcDueDate">2026-10-10</span></div>
+            <div><strong>Fine Calculation Policy:</strong> ₹5 per late day</div>
+          </div>
+
+          <div class="form-group">
+            <label for="calcReturnDate">Actual Return Date <span class="required">*</span></label>
+            <input type="date" id="calcReturnDate" class="form-input" required>
+          </div>
+
+          <!-- Dynamic Fine Calculation Box -->
+          <div class="fine-summary-card">
+            <div class="calc-row">
+              <span>Overdue Days:</span>
+              <strong id="calcLateDays">0 Days</strong>
+            </div>
+            <div class="calc-row">
+              <span>Fine Rate:</span>
+              <span>₹5.00 / day</span>
+            </div>
+            <div class="calc-row total-fine-row">
+              <span>Total Calculated Fine:</span>
+              <strong id="calcTotalFine">₹0</strong>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="returnModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Process Return & Collect Fine</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Add / Edit Book -->
+  <div id="bookModal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="bookModalTitle">Add New Book</h3>
+        <button class="modal-close" data-close="bookModal">&times;</button>
+      </div>
+      <form id="bookForm">
+        <div class="modal-body">
+          <input type="hidden" id="formBookMode" value="create">
+          <input type="hidden" id="formBookId">
+
+          <div class="form-group">
+            <label for="formTitle">Book Title <span class="required">*</span></label>
+            <input type="text" id="formTitle" class="form-input" placeholder="e.g. Operating System Concepts" required>
+          </div>
+
+          <div class="form-group">
+            <label for="formAuthor">Author(s) <span class="required">*</span></label>
+            <input type="text" id="formAuthor" class="form-input" placeholder="e.g. Silberschatz & Galvin" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formCategory">Category <span class="required">*</span></label>
+              <select id="formCategory" class="form-select" required>
+                <!-- Populated by JS -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="formIsbn">ISBN Number <span class="required">*</span></label>
+              <input type="text" id="formIsbn" class="form-input" placeholder="e.g. 978-0131873254" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formQuantity">Total Copies <span class="required">*</span></label>
+              <input type="number" id="formQuantity" class="form-input" min="1" max="100" value="5" required>
+            </div>
+            <div class="form-group">
+              <label for="formShelf">Shelf / Location</label>
+              <input type="text" id="formShelf" class="form-input" placeholder="e.g. Rack OS-02">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="bookModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Book Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>&copy; 2026 Prathyusha Central Digital Library &mdash; Web Technologies Academic Project. Designed by Yuvathilagan.</p>
+  </footer>
+
+  <script src="src/js/app.js"></script>
+</body>
+</html>

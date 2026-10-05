@@ -1,0 +1,18 @@
+{
+  "name": "internship-job-application-portal",
+  "version": "1.0.0",
+  "description": "Internship and Job Application Portal for Web Technologies Academic Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/test.js"
+  },
+  "keywords": [
+    "web-technologies",
+    "job-portal",
+    "internship-applications",
+    "candidate-status-tracking"
+  ],
+  "author": "Yuvathilagan",
+  "license": "MIT"
+}

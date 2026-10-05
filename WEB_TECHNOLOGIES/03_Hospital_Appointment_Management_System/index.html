@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital Appointment Management System | Prathyusha Health Center</title>
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">🏥</div>
+        <div>
+          <h1>Prathyusha Multi-Speciality Health Center</h1>
+          <p class="sub-brand">Outpatient Department (OPD) & Appointment Scheduling System</p>
+        </div>
+      </div>
+      <div class="role-selector">
+        <label for="portalRoleSwitch"><strong>Active View:</strong></label>
+        <select id="portalRoleSwitch" class="form-select">
+          <option value="patient">Patient Booking Portal</option>
+          <option value="admin">Hospital Reception / Admin</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- PATIENT VIEW -->
+    <section id="patientView" class="portal-view">
+      <!-- Navigation Tabs -->
+      <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="tabDoctors">🔍 Find Doctors & Book</button>
+        <button class="tab-btn" data-tab="tabHistory">📋 My Appointment History</button>
+      </div>
+
+      <!-- Tab 1: Doctors Directory -->
+      <div id="tabDoctors" class="tab-content active">
+        <div class="filter-bar card">
+          <div class="search-box">
+            <input type="text" id="doctorSearchInput" class="form-input" placeholder="Search doctor by name or specialization...">
+          </div>
+          <div class="filter-box">
+            <select id="specFilter" class="form-select">
+              <option value="">All Specializations</option>
+            </select>
+          </div>
+          <span id="docCountBadge" class="badge badge-info">0 Doctors Available</span>
+        </div>
+
+        <div id="doctorsGrid" class="doctors-grid">
+          <!-- Doctor cards populated by JS -->
+        </div>
+      </div>
+
+      <!-- Tab 2: Appointment History -->
+      <div id="tabHistory" class="tab-content hidden">
+        <div class="card">
+          <div class="history-filter-bar">
+            <h2>My Scheduled Appointments</h2>
+            <div class="filter-group">
+              <input type="tel" id="historyPhoneFilter" class="form-input" placeholder="Filter by phone (e.g. 9876543210)">
+              <select id="historyStatusFilter" class="form-select">
+                <option value="">All Statuses</option>
+                <option value="Booked">Booked</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Appointment ID</th>
+                  <th>Patient Details</th>
+                  <th>Consulting Doctor</th>
+                  <th>Specialization</th>
+                  <th>Date & Time Slot</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="patientAppointmentsTbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN / RECEPTION VIEW -->
+    <section id="adminView" class="portal-view hidden">
+      <!-- KPI Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📅</div>
+          <div>
+            <div class="stat-value" id="kpiTotalApts">0</div>
+            <div class="stat-label">Total Appointments</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏳</div>
+          <div>
+            <div class="stat-value" id="kpiBookedApts">0</div>
+            <div class="stat-label">Active Booked Visits</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div>
+            <div class="stat-value" id="kpiCompletedApts">0</div>
+            <div class="stat-label">Completed Consultations</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">❌</div>
+          <div>
+            <div class="stat-value" id="kpiCancelledApts">0</div>
+            <div class="stat-label">Cancelled Bookings</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="admin-top-bar">
+          <h2>Master Appointment Roster</h2>
+          <div class="btn-group">
+            <button id="btnAddDoctor" class="btn btn-primary">+ Add New Doctor</button>
+            <button id="btnResetData" class="btn btn-outline">↺ Reset Sample Records</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Appt ID</th>
+                <th>Patient Name</th>
+                <th>Contact</th>
+                <th>Doctor</th>
+                <th>Schedule</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Reception Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminAppointmentsTbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Book Appointment -->
+  <div id="bookingModal" class="modal-overlay hidden">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div>
+          <h3 id="bookingDoctorName">Book Doctor Consultation</h3>
+          <p id="bookingDoctorSpec" class="sub-text">Specialization</p>
+        </div>
+        <button class="modal-close" data-close="bookingModal">&times;</button>
+      </div>
+      <form id="bookingForm" novalidate>
+        <div class="modal-body">
+          <input type="hidden" id="bookDoctorId">
+
+          <!-- Patient Info -->
+          <h4 class="form-section-title">1. Patient Information</h4>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookPatientName">Patient Full Name <span class="required">*</span></label>
+              <input type="text" id="bookPatientName" class="form-input" placeholder="e.g. Yuvathilagan M" required>
+              <div class="error-msg" id="errBookName"></div>
+            </div>
+            <div class="form-group">
+              <label for="bookPatientPhone">Mobile Phone (10 digits) <span class="required">*</span></label>
+              <input type="tel" id="bookPatientPhone" class="form-input" placeholder="e.g. 9876543210" required>
+              <div class="error-msg" id="errBookPhone"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookPatientEmail">Email Address <span class="required">*</span></label>
+              <input type="email" id="bookPatientEmail" class="form-input" placeholder="e.g. patient@gmail.com" required>
+              <div class="error-msg" id="errBookEmail"></div>
+            </div>
+            <div class="form-row" style="gap: 0.5rem;">
+              <div class="form-group">
+                <label for="bookPatientAge">Age</label>
+                <input type="number" id="bookPatientAge" class="form-input" min="1" max="120" value="22">
+              </div>
+              <div class="form-group">
+                <label for="bookPatientGender">Gender</label>
+                <select id="bookPatientGender" class="form-select">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Schedule & Slot Selection -->
+          <h4 class="form-section-title">2. Select Consultation Date & Time Slot</h4>
+          <div class="form-group">
+            <label for="bookDate">Appointment Date <span class="required">*</span></label>
+            <input type="date" id="bookDate" class="form-input" required>
+            <div class="error-msg" id="errBookDate"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Available Consultation Slots (Prevent Double-Booking) <span class="required">*</span></label>
+            <p class="helper-text">Green slots are available. Red slots are already booked by other patients.</p>
+            <div id="slotsContainer" class="slots-container">
+              <!-- Slot buttons rendered dynamically -->
+            </div>
+            <input type="hidden" id="selectedTimeSlot" required>
+            <div class="error-msg" id="errBookSlot"></div>
+          </div>
+
+          <!-- Reason -->
+          <div class="form-group">
+            <label for="bookReason">Reason for Consultation / Symptoms</label>
+            <textarea id="bookReason" class="form-input" rows="2" placeholder="Briefly describe your symptoms..."></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="bookingModal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnConfirmBooking">Confirm Appointment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Add Doctor -->
+  <div id="doctorModal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Add Consulting Doctor</h3>
+        <button class="modal-close" data-close="doctorModal">&times;</button>
+      </div>
+      <form id="doctorForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="docName">Doctor Name & Credentials <span class="required">*</span></label>
+            <input type="text" id="docName" class="form-input" placeholder="e.g. Dr. Ramesh Kumar, MS" required>
+          </div>
+          <div class="form-group">
+            <label for="docSpec">Specialization <span class="required">*</span></label>
+            <select id="docSpec" class="form-select" required>
+              <!-- Populated by JS -->
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="docExp">Experience</label>
+              <input type="text" id="docExp" class="form-input" placeholder="e.g. 10 Years" required>
+            </div>
+            <div class="form-group">
+              <label for="docFee">Consultation Fee (₹)</label>
+              <input type="number" id="docFee" class="form-input" value="500" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="docRoom">Consultation Suite / Room</label>
+            <input type="text" id="docRoom" class="form-input" placeholder="e.g. Room 108" required>
+          </div>
+          <div class="form-group">
+            <label for="docTime">Available Timings</label>
+            <input type="text" id="docTime" class="form-input" value="09:00 AM - 01:00 PM" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="doctorModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Doctor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>&copy; 2026 Prathyusha Multi-Speciality Health Center &mdash; Web Technologies Academic Project. Designed by Yuvathilagan.</p>
+  </footer>
+
+  <script src="src/js/app.js"></script>
+</body>
+</html>

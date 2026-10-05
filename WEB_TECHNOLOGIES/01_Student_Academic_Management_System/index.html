@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Academic Management System | Prathyusha Engineering College</title>
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">🎓</div>
+        <div>
+          <h1>Prathyusha Engineering College</h1>
+          <p class="sub-brand">Student Academic Management & CGPA Grading System</p>
+        </div>
+      </div>
+      <div class="role-selector">
+        <label for="roleSwitch"><strong>Active Portal:</strong></label>
+        <select id="roleSwitch" class="form-select">
+          <option value="admin">Administrator / Faculty</option>
+          <option value="student">Student Portal</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content">
+    
+    <!-- ADMIN VIEW -->
+    <section id="adminView" class="portal-view">
+      <!-- KPI Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div>
+            <div class="stat-value" id="kpiTotalStudents">0</div>
+            <div class="stat-label">Total Enrolled Students</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📚</div>
+          <div>
+            <div class="stat-value" id="kpiTotalSubjects">0</div>
+            <div class="stat-label">Curriculum Subjects</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📈</div>
+          <div>
+            <div class="stat-value" id="kpiAvgCgpa">0.00</div>
+            <div class="stat-label">Overall Average CGPA</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div>
+            <div class="stat-value" id="kpiPassRate">0%</div>
+            <div class="stat-label">Pass Percentage</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action & Filter Bar -->
+      <div class="action-bar card">
+        <div class="filter-group">
+          <input type="text" id="searchInput" placeholder="Search by Student ID or Name..." class="form-input">
+          <select id="deptFilter" class="form-select">
+            <option value="">All Departments</option>
+          </select>
+          <select id="yearFilter" class="form-select">
+            <option value="">All Years</option>
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+            <option value="4th Year">4th Year</option>
+          </select>
+        </div>
+        <div class="btn-group">
+          <button id="btnAddStudent" class="btn btn-primary">+ Add New Student</button>
+          <button id="btnAddSubject" class="btn btn-secondary">+ Add Subject</button>
+          <button id="btnResetData" class="btn btn-outline" title="Reset sample records">↺ Reset Data</button>
+        </div>
+      </div>
+
+      <!-- Students Table -->
+      <div class="table-container card">
+        <div class="table-header">
+          <h2>Student Records Directory</h2>
+          <span id="recordCountBadge" class="badge">0 Records</span>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Student ID</th>
+                <th>Full Name</th>
+                <th>Department</th>
+                <th>Year</th>
+                <th>Email / Phone</th>
+                <th>CGPA</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="studentsTableBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDENT VIEW -->
+    <section id="studentView" class="portal-view hidden">
+      <div class="card student-login-card">
+        <h2>Student Grade & Attendance Portal</h2>
+        <p>Select or enter your Student Registration ID to view your complete academic profile, grades, and semester CGPA.</p>
+        <div class="student-select-box">
+          <label for="studentSelect">Select Student:</label>
+          <div class="flex-row">
+            <select id="studentSelect" class="form-select">
+              <!-- Populated via JS -->
+            </select>
+            <button id="btnLoadStudent" class="btn btn-primary">View Academic Sheet</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="studentProfileCard" class="card profile-card hidden">
+        <div class="profile-header">
+          <div class="profile-info">
+            <h2 id="spName">Student Name</h2>
+            <p><strong>Registration ID:</strong> <span id="spId">PEC000</span> | <strong>Department:</strong> <span id="spDept">CSE</span> | <strong>Year:</strong> <span id="spYear">3rd Year</span></p>
+            <p><strong>Email:</strong> <span id="spEmail">student@pec.edu</span> | <strong>Phone:</strong> <span id="spPhone">9876543210</span></p>
+          </div>
+          <div class="cgpa-badge-box">
+            <div class="cgpa-number" id="spCgpa">0.00</div>
+            <div class="cgpa-title">Current Semester CGPA</div>
+          </div>
+        </div>
+
+        <h3 class="section-title">Course-wise Marks & Attendance Breakdown</h3>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Subject Name</th>
+                <th>Credits</th>
+                <th>Internal (40)</th>
+                <th>External (60)</th>
+                <th>Total (100)</th>
+                <th>Grade</th>
+                <th>Grade Point</th>
+                <th>Attendance</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody id="studentMarksTableBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="portal-footer-actions">
+          <button onclick="window.print()" class="btn btn-secondary">🖨️ Print Grade Sheet</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Add/Edit Student -->
+  <div id="studentModal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="studentModalTitle">Add New Student</h3>
+        <button class="modal-close" data-close="studentModal">&times;</button>
+      </div>
+      <form id="studentForm" novalidate>
+        <div class="modal-body">
+          <input type="hidden" id="studentFormMode" value="create">
+          
+          <div class="form-group">
+            <label for="formStudentId">Student Registration ID <span class="required">*</span></label>
+            <input type="text" id="formStudentId" class="form-input" placeholder="e.g. PEC2023CS005" required>
+            <div class="error-msg" id="errStudentId"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="formStudentName">Full Name <span class="required">*</span></label>
+            <input type="text" id="formStudentName" class="form-input" placeholder="e.g. Anandha Krishnan" required>
+            <div class="error-msg" id="errStudentName"></div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formDepartment">Department <span class="required">*</span></label>
+              <select id="formDepartment" class="form-select" required>
+                <!-- Populated via JS -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="formYear">Academic Year <span class="required">*</span></label>
+              <select id="formYear" class="form-select" required>
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year" selected>3rd Year</option>
+                <option value="4th Year">4th Year</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formEmail">Email Address <span class="required">*</span></label>
+              <input type="email" id="formEmail" class="form-input" placeholder="e.g. student@gmail.com" required>
+              <div class="error-msg" id="errEmail"></div>
+            </div>
+            <div class="form-group">
+              <label for="formPhone">Phone Number <span class="required">*</span></label>
+              <input type="tel" id="formPhone" class="form-input" placeholder="e.g. 9876543210" required>
+              <div class="error-msg" id="errPhone"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="studentModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Student Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Academic Marks & Attendance -->
+  <div id="marksModal" class="modal-overlay hidden">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div>
+          <h3 id="marksModalTitle">Academic Evaluation & Attendance</h3>
+          <p id="marksModalSubtitle" class="sub-text">Student: Loading...</p>
+        </div>
+        <button class="modal-close" data-close="marksModal">&times;</button>
+      </div>
+      <form id="marksForm">
+        <div class="modal-body">
+          <p class="helper-text">Enter Internal Mark (0-40) and External Mark (0-60). Total, Letter Grade, and Grade Points calculate in real-time.</p>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Credits</th>
+                  <th>Internal (Max 40)</th>
+                  <th>External (Max 60)</th>
+                  <th>Total (100)</th>
+                  <th>Grade</th>
+                  <th>Attendance %</th>
+                </tr>
+              </thead>
+              <tbody id="marksEntryTbody">
+                <!-- Inputs generated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="marksModal">Close</button>
+          <button type="submit" class="btn btn-primary">Save Marks & Attendance</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Add Subject -->
+  <div id="subjectModal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Add New Curriculum Subject</h3>
+        <button class="modal-close" data-close="subjectModal">&times;</button>
+      </div>
+      <form id="subjectForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="subjCode">Subject Code <span class="required">*</span></label>
+            <input type="text" id="subjCode" class="form-input" placeholder="e.g. CS3402" required>
+            <div class="error-msg" id="errSubjCode"></div>
+          </div>
+          <div class="form-group">
+            <label for="subjName">Subject Name <span class="required">*</span></label>
+            <input type="text" id="subjName" class="form-input" placeholder="e.g. Cloud Computing" required>
+            <div class="error-msg" id="errSubjName"></div>
+          </div>
+          <div class="form-group">
+            <label for="subjCredits">Credits (1 - 6) <span class="required">*</span></label>
+            <input type="number" id="subjCredits" class="form-input" min="1" max="6" value="3" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="subjectModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Subject</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>&copy; 2026 Prathyusha Engineering College &mdash; Web Technologies Academic Project. Designed by Yuvathilagan.</p>
+  </footer>
+
+  <script src="src/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hostel Management System - Prathyusha Engineering College</title>
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+
+  <!-- Application Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="brand-icon">🏢</div>
+        <div>
+          <h1 class="brand-title">Hostel Management System</h1>
+          <p class="brand-subtitle">Prathyusha Engineering College — Kaveri & Bhavani Student Residences</p>
+        </div>
+      </div>
+      <div class="header-nav">
+        <div class="role-toggle" role="radiogroup" aria-label="Select User Role">
+          <button class="role-btn active" data-role="student" role="radio" aria-checked="true">🧑‍🎓 Resident Student</button>
+          <button class="role-btn" data-role="admin" role="radio" aria-checked="false">🛡️ Warden / Admin</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-wrapper">
+
+    <!-- Mandatory Top Dashboard Metrics (Dynamic) -->
+    <section class="metrics-grid" aria-label="Hostel Statistics Overview">
+      <div class="metric-card">
+        <div class="metric-icon-box icon-blue">🛏️</div>
+        <div class="metric-info">
+          <h3 id="statTotalRooms">5</h3>
+          <p>Total Rooms</p>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon-box icon-red">🚪</div>
+        <div class="metric-info">
+          <h3 id="statOccupiedRooms">4</h3>
+          <p>Occupied Rooms</p>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon-box icon-green">🟢</div>
+        <div class="metric-info">
+          <h3 id="statAvailableRooms">4</h3>
+          <p>Available Rooms</p>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon-box icon-amber">📝</div>
+        <div class="metric-info">
+          <h3 id="statPendingLeaves">1</h3>
+          <p>Pending Leave Requests</p>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon-box icon-purple">⚠️</div>
+        <div class="metric-info">
+          <h3 id="statPendingComplaints">2</h3>
+          <p>Pending Complaints</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- VIEW 1: STUDENT RESIDENT PORTAL                                -->
+    <!-- ============================================================== -->
+    <section id="studentPortalSection">
+      <!-- Student Profile Switcher for Testing -->
+      <div style="background: #ffffff; border: 1px solid #bbf7d0; border-radius: 8px; padding: 0.75rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+        <span style="font-size: 0.9rem; font-weight: 600; color: #14532d;">Simulate Logged-in Resident:</span>
+        <select id="activeStudentSelector" class="form-control" style="width: auto; max-width: 380px; font-weight: 600;"></select>
+      </div>
+
+      <!-- Student Navigation Sub-tabs -->
+      <nav class="subnav-tabs" aria-label="Student Navigation">
+        <button class="subnav-btn student-tab-btn active" data-tab="profile">🪪 Profile, Room & Roommates</button>
+        <button class="subnav-btn student-tab-btn" data-tab="leave">✈️ Leave Request Form</button>
+        <button class="subnav-btn student-tab-btn" data-tab="complaints">🛠️ Maintenance Complaints</button>
+      </nav>
+
+      <!-- TAB 1: Profile & Room Details -->
+      <div id="studentProfileTab">
+        <div class="resident-summary-grid">
+          <!-- Student Card -->
+          <article class="resident-card">
+            <div class="resident-header">
+              <div class="resident-avatar" id="studentAvatar">Y</div>
+              <div class="resident-info">
+                <h2 id="studentName">Yuvathilagan M</h2>
+                <p id="studentSub">PEC2023CS001 • CSE (3rd Year)</p>
+              </div>
+            </div>
+            <ul class="field-list">
+              <li>
+                <span class="field-title">Allocated Room:</span>
+                <span class="field-value" id="studentRoomVal">101 (Block A)</span>
+              </li>
+              <li>
+                <span class="field-title">Bed Number:</span>
+                <span class="field-value" id="studentBedVal">Bed 1</span>
+              </li>
+              <li>
+                <span class="field-title">Mobile Phone:</span>
+                <span class="field-value" id="studentPhoneVal">9876543210</span>
+              </li>
+              <li>
+                <span class="field-title">Parent Contact:</span>
+                <span class="field-value" id="studentParentVal">9876543299</span>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Fee Status Card -->
+          <article class="resident-card">
+            <div class="panel-header" style="margin-bottom: 0.75rem;">
+              <h3 style="font-size: 1.1rem; color: #14532d;">Hostel Fee Status</h3>
+              <span class="badge badge-paid" id="studentFeeStatusBadge">Paid</span>
+            </div>
+            <ul class="field-list">
+              <li>
+                <span class="field-title">Academic Year Fee:</span>
+                <span class="field-value" id="studentFeeAmountVal">₹65,000</span>
+              </li>
+              <li>
+                <span class="field-title">Amount Paid:</span>
+                <span class="field-value" id="studentFeePaidVal" style="color: #15803d;">₹65,000</span>
+              </li>
+              <li>
+                <span class="field-title">Balance Due:</span>
+                <span class="field-value" id="studentFeeDueVal" style="color: #dc2626;">₹0</span>
+              </li>
+            </ul>
+            <div style="margin-top: 1rem; padding: 0.75rem; background: #f0fdf4; border-radius: 6px; font-size: 0.8rem; color: #166534;">
+              ✅ Mess, boarding, and high-speed Wi-Fi clearances are valid for the current semester.
+            </div>
+          </article>
+        </div>
+
+        <!-- Roommates Section -->
+        <div class="panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title">👥 Assigned Roommates</h3>
+            <span style="font-size: 0.85rem; color: #64748b;">Room Amenities: <strong id="studentRoomAmenities">Attached Bath, Wi-Fi, Balcony</strong></span>
+          </div>
+          <div id="studentRoommatesList">
+            <!-- Dynamic Roommates Rendered Here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Leave Request Submission & History -->
+      <div id="studentLeaveTab" style="display: none;">
+        <div class="panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title">Submit Outpass / Leave Request</h3>
+          </div>
+          <form id="leaveRequestForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="leaveFromDate">Departure Date <span class="req">*</span></label>
+                <input type="date" id="leaveFromDate" class="form-control" required value="2026-10-15">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="leaveToDate">Expected Return Date <span class="req">*</span></label>
+                <input type="date" id="leaveToDate" class="form-control" required value="2026-10-18">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label" for="leaveReason">Reason for Leave <span class="req">*</span></label>
+                <textarea id="leaveReason" class="form-control" rows="3" placeholder="Specify clear reason (e.g. Festival vacation, medical appointment, family function)..." required></textarea>
+              </div>
+              <div class="form-group full-width">
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; cursor: pointer;">
+                  <input type="checkbox" id="leaveParentConsent" checked required>
+                  <span>I confirm that my parents/guardian have been informed and provided permission for this leave.</span>
+                </label>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+              <button type="submit" class="btn btn-primary">Submit Leave Request</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title">My Leave Applications & Outpass History</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" aria-label="My Leave Requests Table">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Dates (From - To)</th>
+                  <th>Reason</th>
+                  <th>Applied On</th>
+                  <th>Status</th>
+                  <th>Warden Remarks</th>
+                </tr>
+              </thead>
+              <tbody id="studentLeavesTbody">
+                <!-- Dynamic leaves rendered here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Maintenance Complaints -->
+      <div id="studentComplaintsTab" style="display: none;">
+        <div class="panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title">Report Hostel Maintenance Grievance</h3>
+          </div>
+          <form id="complaintForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="complaintCategory">Grievance Category <span class="req">*</span></label>
+                <select id="complaintCategory" class="form-control" required>
+                  <option value="Electricity">Electricity (Fan, Light, Socket)</option>
+                  <option value="Plumbing">Plumbing (Tap, Shower, Drain)</option>
+                  <option value="Wi-Fi">Wi-Fi & LAN Network</option>
+                  <option value="Cleanliness">Room & Corridor Housekeeping</option>
+                  <option value="Carpentry">Carpentry (Bed, Wardrobe, Door)</option>
+                  <option value="Other">Other Issues</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label" for="complaintDesc">Detailed Grievance Description <span class="req">*</span></label>
+                <textarea id="complaintDesc" class="form-control" rows="3" placeholder="Describe the fault clearly to help maintenance technicians resolve it promptly..." required></textarea>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+              <button type="submit" class="btn btn-primary">Register Grievance</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title">My Maintenance Requests Status</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" aria-label="My Complaints Table">
+              <thead>
+                <tr>
+                  <th>Complaint ID</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Submitted On</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="studentComplaintsTbody">
+                <!-- Dynamic complaints rendered here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- VIEW 2: WARDEN / ADMIN PORTAL                                  -->
+    <!-- ============================================================== -->
+    <section id="wardenPortalSection" style="display: none;">
+      <!-- Warden Sub-tabs -->
+      <nav class="subnav-tabs" aria-label="Warden Navigation">
+        <button class="subnav-btn warden-tab-btn active" data-tab="rooms">🚪 Room Occupancy Matrix</button>
+        <button class="subnav-btn warden-tab-btn" data-tab="allocations">🧑‍🎓 Student Room Allocations</button>
+        <button class="subnav-btn warden-tab-btn" data-tab="leaves">📝 Review Leave Requests</button>
+        <button class="subnav-btn warden-tab-btn" data-tab="complaints">🛠️ Manage Complaints</button>
+      </nav>
+
+      <!-- TAB 1: Room Occupancy Grid -->
+      <div id="wardenRoomsTab">
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title">Room Occupancy & Capacity Status</h2>
+          </div>
+          <div class="rooms-grid" id="wardenRoomsGrid">
+            <!-- Dynamic Room Cards rendered here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Student Allocation Table -->
+      <div id="wardenStudentsTab" style="display: none;">
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title">Resident Student Roster & Room Allocation</h2>
+            <button class="btn btn-primary" id="openAddStudentModalBtn">+ Add New Resident</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" aria-label="Student Allocations Table">
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Name</th>
+                  <th>Department & Year</th>
+                  <th>Assigned Room</th>
+                  <th>Hostel Fee</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="wardenStudentsTbody">
+                <!-- Dynamic student rows rendered here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Leave Requests Queue -->
+      <div id="wardenLeavesTab" style="display: none;">
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title">Student Outpass & Leave Review Queue</h2>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" aria-label="Warden Leave Applications Table">
+              <thead>
+                <tr>
+                  <th>Leave ID</th>
+                  <th>Resident</th>
+                  <th>Room</th>
+                  <th>Duration</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="wardenLeavesTbody">
+                <!-- Dynamic leaves rendered here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: Complaints Tracker -->
+      <div id="wardenComplaintsTab" style="display: none;">
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title">Hostel Maintenance Grievance Tracker</h2>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" aria-label="Warden Complaints Table">
+              <thead>
+                <tr>
+                  <th>Grievance ID</th>
+                  <th>Category</th>
+                  <th>Resident</th>
+                  <th>Description</th>
+                  <th>Reported Date</th>
+                  <th>Current Status</th>
+                  <th>Update Workflow</th>
+                </tr>
+              </thead>
+              <tbody id="wardenComplaintsTbody">
+                <!-- Dynamic complaints rendered here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL 1: Allocate / Change Room -->
+  <div class="modal-backdrop" id="allocateModal" role="dialog" aria-modal="true" aria-labelledby="allocModalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="allocModalTitle">Allocate / Change Room</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="roomAllocationForm">
+          <input type="hidden" id="allocStudentId">
+          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 0.85rem; border-radius: 8px; margin-bottom: 1.25rem; font-size: 0.88rem;">
+            <p><strong>Student:</strong> <span id="allocStudentName">-</span></p>
+            <p><strong>Current Allocation:</strong> <span id="allocCurrentRoom">-</span></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="allocTargetRoom">Select Destination Room <span class="req">*</span></label>
+            <select id="allocTargetRoom" class="form-control" required></select>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+            <button type="button" class="btn btn-secondary btn-modal-cancel">Cancel</button>
+            <button type="submit" class="btn btn-primary">Confirm Allocation</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Add New Resident Student -->
+  <div class="modal-backdrop" id="addStudentModal" role="dialog" aria-modal="true" aria-labelledby="addStudentModalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="addStudentModalTitle">Register New Resident Student</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="addStudentForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="newStudentId">Roll / Student ID <span class="req">*</span></label>
+              <input type="text" id="newStudentId" class="form-control" placeholder="e.g. PEC2024CS045" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newStudentName">Full Name <span class="req">*</span></label>
+              <input type="text" id="newStudentName" class="form-control" placeholder="e.g. Manoj Kumar R" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newStudentDept">Department <span class="req">*</span></label>
+              <select id="newStudentDept" class="form-control" required>
+                <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Computer Science and Business Systems">Computer Science and Business Systems</option>
+                <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newStudentYear">Academic Year <span class="req">*</span></label>
+              <select id="newStudentYear" class="form-control" required>
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year">3rd Year</option>
+                <option value="4th Year">4th Year</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newStudentPhone">Student Phone <span class="req">*</span></label>
+              <input type="tel" id="newStudentPhone" class="form-control" placeholder="10-digit mobile" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newStudentParentPhone">Parent Phone <span class="req">*</span></label>
+              <input type="tel" id="newStudentParentPhone" class="form-control" placeholder="Parent mobile" required>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label" for="newStudentEmail">Email Address <span class="req">*</span></label>
+              <input type="email" id="newStudentEmail" class="form-control" placeholder="e.g. manoj@gmail.com" required>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+            <button type="button" class="btn btn-secondary btn-modal-cancel">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Resident</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="alert-toast" id="alertToast" role="alert"></div>
+
+  <!-- Application Footer -->
+  <footer class="app-footer">
+    <p><strong>Hostel Management System</strong> | Web Technologies Academic Submission</p>
+    <p>Student: <strong>Yuvathilagan</strong> | Department of Computer Science and Engineering</p>
+  </footer>
+
+  <script src="src/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internship and Job Application Portal | Prathyusha Placements</title>
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+  <!-- Global Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">💼</div>
+        <div>
+          <h1>Prathyusha Career & Placement Portal</h1>
+          <p class="sub-brand">Campus Recruitment, Internship Applications & Status Tracking</p>
+        </div>
+      </div>
+      <div class="role-selector">
+        <label for="portalRoleSwitch"><strong>Active Portal:</strong></label>
+        <select id="portalRoleSwitch" class="form-select">
+          <option value="student">Student Candidate Portal</option>
+          <option value="recruiter">Placement Cell / Recruiter</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- STUDENT PORTAL -->
+    <section id="studentView" class="portal-view">
+      <!-- Active Student Selector -->
+      <div class="student-bar card">
+        <div class="flex-between">
+          <div>
+            <strong>Active Candidate Profile:</strong>
+            <select id="studentProfileSelect" class="form-select" style="display:inline-block; width: auto; margin-left: 0.5rem;">
+              <option value="PEC2023CS001">PEC2023CS001 - Yuvathilagan M (B.E CSE, 9.60 CGPA)</option>
+              <option value="PEC2023CS002">PEC2023CS002 - Kavitha R (B.E CSE, 8.50 CGPA)</option>
+              <option value="PEC2023IT003">PEC2023IT003 - Dinesh Kumar S (B.Tech IT, 7.80 CGPA)</option>
+            </select>
+          </div>
+          <div>
+            <span class="badge badge-info">Verified Campus Placement Candidate</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="tabJobs">💼 Browse Openings</button>
+        <button class="tab-btn" data-tab="tabMyApps">📋 My Applications & Status</button>
+      </div>
+
+      <!-- Tab 1: Browse Openings -->
+      <div id="tabJobs" class="tab-content active">
+        <div class="filter-bar card">
+          <div class="search-box">
+            <input type="text" id="jobSearchInput" class="form-input" placeholder="Search by Job Title, Company, or Skills (e.g. JavaScript, Python, SQL)...">
+          </div>
+          <div class="filter-box">
+            <select id="jobTypeFilter" class="form-select">
+              <option value="">All Job Types</option>
+              <option value="Full-Time">Full-Time</option>
+              <option value="Internship">Internship</option>
+              <option value="Remote / Hybrid">Remote / Hybrid</option>
+            </select>
+          </div>
+          <div class="filter-box">
+            <select id="locationFilter" class="form-select">
+              <option value="">All Locations</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Remote">Remote</option>
+            </select>
+          </div>
+          <span id="jobCountBadge" class="badge badge-info">0 Opportunities</span>
+        </div>
+
+        <div id="jobsGrid" class="jobs-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Tab 2: My Applications & Status Tracking -->
+      <div id="tabMyApps" class="tab-content hidden">
+        <div class="card">
+          <div class="table-header">
+            <h2>Submitted Applications & Live Status Tracking</h2>
+            <span id="myAppsBadge" class="badge badge-primary">0 Applications</span>
+          </div>
+          <div id="myApplicationsContainer" class="my-applications-list">
+            <!-- Rendered dynamically with progress step tracker -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECRUITER / PLACEMENT CELL VIEW -->
+    <section id="recruiterView" class="portal-view hidden">
+      <!-- Recruitment KPI Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📢</div>
+          <div>
+            <div class="stat-value" id="kpiOpenings">0</div>
+            <div class="stat-label">Active Openings</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📥</div>
+          <div>
+            <div class="stat-value" id="kpiTotalApps">0</div>
+            <div class="stat-label">Total Applications</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div>
+            <div class="stat-value" id="kpiShortlisted">0</div>
+            <div class="stat-label">Shortlisted Candidates</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <div>
+            <div class="stat-value" id="kpiSelected">0</div>
+            <div class="stat-label">Selected Offers</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manage Postings & Candidates -->
+      <div class="card">
+        <div class="admin-top-bar">
+          <h2>Candidate Applications Review Roster</h2>
+          <div class="btn-group">
+            <button id="btnPostJob" class="btn btn-primary">+ Post New Job Opening</button>
+            <button id="btnResetData" class="btn btn-outline">↺ Reset Sample Portal</button>
+          </div>
+        </div>
+
+        <div class="filter-group" style="margin-bottom: 1rem;">
+          <select id="adminJobSelectFilter" class="form-select" style="max-width: 300px;">
+            <option value="">All Job Openings</option>
+          </select>
+          <select id="adminStatusSelectFilter" class="form-select" style="max-width: 200px;">
+            <option value="">All Statuses</option>
+            <option value="Applied">Applied</option>
+            <option value="Under Review">Under Review</option>
+            <option value="Shortlisted">Shortlisted</option>
+            <option value="Interview">Interview</option>
+            <option value="Selected">Selected</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>App ID</th>
+                <th>Candidate Details</th>
+                <th>Applied Position</th>
+                <th>CGPA</th>
+                <th>Resume</th>
+                <th>Applied Date</th>
+                <th>Status</th>
+                <th>Recruiter Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminAppsTbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Apply for Job -->
+  <div id="applyModal" class="modal-overlay hidden">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div>
+          <h3 id="applyJobTitle">Job Application</h3>
+          <p id="applyJobCompany" class="sub-text">Company Name | Location</p>
+        </div>
+        <button class="modal-close" data-close="applyModal">&times;</button>
+      </div>
+      <form id="applyForm" novalidate>
+        <div class="modal-body">
+          <input type="hidden" id="applyJobId">
+
+          <div class="alert alert-info" style="margin-bottom: 1rem;">
+            <strong>Eligibility Note:</strong> <span id="applyEligibilityNote">Eligible</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="appStudentId">Student ID <span class="required">*</span></label>
+              <input type="text" id="appStudentId" class="form-input" readonly>
+            </div>
+            <div class="form-group">
+              <label for="appStudentName">Full Name <span class="required">*</span></label>
+              <input type="text" id="appStudentName" class="form-input" required>
+              <div class="error-msg" id="errAppName"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="appEmail">Email Address <span class="required">*</span></label>
+              <input type="email" id="appEmail" class="form-input" required>
+              <div class="error-msg" id="errAppEmail"></div>
+            </div>
+            <div class="form-group">
+              <label for="appPhone">Phone Number <span class="required">*</span></label>
+              <input type="tel" id="appPhone" class="form-input" required>
+              <div class="error-msg" id="errAppPhone"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="appCgpa">Current CGPA <span class="required">*</span></label>
+              <input type="text" id="appCgpa" class="form-input" placeholder="e.g. 8.75" required>
+            </div>
+            <div class="form-group">
+              <label for="appResume">Upload Resume (.pdf, .docx) <span class="required">*</span></label>
+              <input type="file" id="appResume" class="form-input" accept=".pdf,.doc,.docx" required>
+              <div class="error-msg" id="errAppResume"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="applyModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Post Job -->
+  <div id="jobModal" class="modal-overlay hidden">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3>Post New Job Opportunity</h3>
+        <button class="modal-close" data-close="jobModal">&times;</button>
+      </div>
+      <form id="postJobForm">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="postTitle">Job Title <span class="required">*</span></label>
+              <input type="text" id="postTitle" class="form-input" placeholder="e.g. Frontend Developer" required>
+            </div>
+            <div class="form-group">
+              <label for="postCompany">Company Name <span class="required">*</span></label>
+              <input type="text" id="postCompany" class="form-input" placeholder="e.g. Zoho Corporation" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="postType">Job Type</label>
+              <select id="postType" class="form-select">
+                <option value="Internship">Internship</option>
+                <option value="Full-Time">Full-Time</option>
+                <option value="Remote / Hybrid">Remote / Hybrid</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="postLocation">Location</label>
+              <input type="text" id="postLocation" class="form-input" placeholder="e.g. Chennai" value="Chennai" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="postSkills">Required Skills (Comma separated)</label>
+              <input type="text" id="postSkills" class="form-input" placeholder="HTML, CSS, JavaScript, React" value="JavaScript, HTML5, CSS3" required>
+            </div>
+            <div class="form-group">
+              <label for="postSalary">Compensation / Stipend</label>
+              <input type="text" id="postSalary" class="form-input" placeholder="e.g. ₹25,000 / Month" value="₹25,000 / Month">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="postEligibility">Eligibility Criteria</label>
+              <input type="text" id="postEligibility" class="form-input" placeholder="e.g. B.E / B.Tech (7.0+ CGPA)" value="B.E / B.Tech - 7.0+ CGPA">
+            </div>
+            <div class="form-group">
+              <label for="postDeadline">Application Deadline <span class="required">*</span></label>
+              <input type="date" id="postDeadline" class="form-input" value="2026-11-30" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="postDescription">Role Description</label>
+            <textarea id="postDescription" class="form-input" rows="3" placeholder="Enter job description..." required>Exciting opportunity for pre-final and final year students to build responsive web applications.</textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="jobModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Post Vacancy</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>&copy; 2026 Prathyusha Engineering College &mdash; Placement Department. Web Technologies Academic Project. Designed by Yuvathilagan.</p>
+  </footer>
+
+  <script src="src/js/app.js"></script>
+</body>
+</html>

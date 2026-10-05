@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Event Registration System - Prathyusha Engineering College</title>
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="brand-icon">🎪</div>
+        <div>
+          <h1 class="brand-title">College Event Registration System</h1>
+          <p class="brand-subtitle">Prathyusha Engineering College — Student Affairs & Cultural Council</p>
+        </div>
+      </div>
+      <nav class="header-nav" aria-label="Main Navigation">
+        <button class="nav-btn active" data-target="events">📅 Browse Events</button>
+        <button class="nav-btn" data-target="my-regs">🎟️ My Registrations</button>
+        <button class="nav-btn" data-target="admin">⚙️ Admin Console</button>
+        <div class="user-badge">
+          <span>👤 Student: Yuvathilagan</span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="main-wrapper">
+
+    <!-- Hero Stats Banner -->
+    <section class="hero-banner" aria-label="Overview Banner">
+      <div class="hero-text">
+        <h2>Campus Events, Fests & Technical Symposia</h2>
+        <p>Explore hackathons, workshops, guest lectures, sports meets, and cultural extravangazas. Register online and download your digital verified pass.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-pill">
+          <span class="stat-number" id="statTotalEvents">5</span>
+          <span class="stat-label">Total Events</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-number" id="statTotalRegs">2</span>
+          <span class="stat-label">Registered</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-number" id="statTotalSeats">430</span>
+          <span class="stat-label">Total Seats</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: Events Catalog -->
+    <section id="eventsCatalogSection">
+      <!-- Search & Category Filters -->
+      <div class="filter-card">
+        <div class="search-box">
+          <input type="text" id="eventSearchInput" class="search-input" placeholder="🔍 Search events by name, venue, keywords...">
+        </div>
+        <div class="category-tabs" role="tablist">
+          <button class="cat-tab active" data-cat="All">All Categories</button>
+          <button class="cat-tab" data-cat="Technical">Technical</button>
+          <button class="cat-tab" data-cat="Cultural">Cultural</button>
+          <button class="cat-tab" data-cat="Sports">Sports</button>
+          <button class="cat-tab" data-cat="Workshop">Workshop</button>
+          <button class="cat-tab" data-cat="Seminar">Seminar</button>
+        </div>
+      </div>
+
+      <!-- Events Grid -->
+      <div class="events-grid" id="eventsGrid">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </section>
+
+    <!-- SECTION 2: My Registrations View -->
+    <section id="myRegistrationsSection" style="display: none;">
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2 class="panel-title">My Registered Events & Entry Passes</h2>
+          <span style="font-size: 0.9rem; color: #64748b;">View active confirmations, passes, or cancel bookings</span>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table" aria-label="My Registrations Table">
+            <thead>
+              <tr>
+                <th>Registration ID</th>
+                <th>Event Name</th>
+                <th>Participant</th>
+                <th>Department</th>
+                <th>Booked On</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="myRegsTableBody">
+              <!-- Rendered via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Admin Console -->
+    <section id="adminSection" style="display: none;">
+      <!-- Event Administration -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2 class="panel-title">Event Catalog Management</h2>
+          <button class="btn btn-primary" id="addEventBtn">+ Create New Event</button>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table" aria-label="Event Management Table">
+            <thead>
+              <tr>
+                <th>Event ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Event Date</th>
+                <th>Deadline</th>
+                <th>Seats (Booked/Max)</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminEventsTableBody">
+              <!-- Rendered via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Participants Roster & Export -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2 class="panel-title">Registered Participants Master Roster</h2>
+          <button class="btn btn-success" id="exportCsvBtn">📥 Export Participant CSV</button>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table" aria-label="Participant Roster Table">
+            <thead>
+              <tr>
+                <th>Registration ID</th>
+                <th>Event Name</th>
+                <th>Student Name</th>
+                <th>Student ID</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="adminParticipantsTableBody">
+              <!-- Rendered via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL 1: Registration Form -->
+  <div class="modal-backdrop" id="registerModal" role="dialog" aria-modal="true" aria-labelledby="modalEventName">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="badge badge-tech" id="modalEventCategory">Technical</span>
+          <h3 class="modal-title" id="modalEventName" style="margin-top: 0.25rem;">Event Registration</h3>
+        </div>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="background: #faf5ff; border: 1px solid #e9d5ff; padding: 0.85rem; border-radius: 8px; margin-bottom: 1.25rem; font-size: 0.88rem;">
+          <p><strong>📅 Date:</strong> <span id="modalEventDate">-</span></p>
+          <p><strong>📍 Venue:</strong> <span id="modalEventVenue">-</span></p>
+        </div>
+
+        <div id="regFormErrors" style="display: none; background: #fee2e2; border: 1px solid #f87171; color: #991b1b; padding: 0.75rem; border-radius: 6px; font-size: 0.85rem; margin-bottom: 1rem;"></div>
+
+        <form id="eventRegForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="regStudentId">Student ID <span class="req">*</span></label>
+              <input type="text" id="regStudentId" class="form-control" placeholder="e.g. PEC2023CS001" value="PEC2023CS001" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regStudentName">Full Name <span class="req">*</span></label>
+              <input type="text" id="regStudentName" class="form-control" placeholder="e.g. Yuvathilagan M" value="Yuvathilagan M" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="regEmail">Email Address <span class="req">*</span></label>
+              <input type="email" id="regEmail" class="form-control" placeholder="e.g. student@pec.edu" value="yuva.pec@gmail.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regPhone">Mobile Number <span class="req">*</span></label>
+              <input type="tel" id="regPhone" class="form-control" placeholder="10-digit phone" value="9876543210" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regDepartment">Academic Department <span class="req">*</span></label>
+            <select id="regDepartment" class="form-control" required>
+              <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Computer Science and Business Systems">Computer Science and Business Systems</option>
+              <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+              <option value="Mechanical Engineering">Mechanical Engineering</option>
+            </select>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+            <button type="button" class="btn btn-secondary btn-modal-cancel">Cancel</button>
+            <button type="submit" class="btn btn-primary">Confirm Registration</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Digital Registration Pass with QR -->
+  <div class="modal-backdrop" id="passModal" role="dialog" aria-modal="true" aria-labelledby="passRegId">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Verified Digital Event Pass</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="digital-pass">
+          <div class="pass-header">
+            <span class="pass-org">Prathyusha Engineering College</span>
+            <span class="pass-id" id="passRegId">REG-EVT-XXXX</span>
+          </div>
+          <h4 class="pass-event-title" id="passEventTitle">Event Title</h4>
+          <div class="pass-grid">
+            <div class="pass-fields">
+              <div>
+                <div class="pass-field-label">Student Name</div>
+                <div class="pass-field-value" id="passStudentName">-</div>
+              </div>
+              <div>
+                <div class="pass-field-label">Roll / Reg No</div>
+                <div class="pass-field-value" id="passStudentId">-</div>
+              </div>
+              <div>
+                <div class="pass-field-label">Department</div>
+                <div class="pass-field-value" id="passDepartment">-</div>
+              </div>
+              <div>
+                <div class="pass-field-label">Schedule</div>
+                <div class="pass-field-value" id="passDateTime">-</div>
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <div class="pass-field-label">Venue Location</div>
+                <div class="pass-field-value" id="passVenue">-</div>
+              </div>
+            </div>
+            <div class="qr-box">
+              <canvas id="passQrCanvas" width="100" height="100"></canvas>
+              <span class="qr-caption">SCAN TO VERIFY</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.25rem; text-align: center;">
+          <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print Pass</button>
+          <button class="btn btn-primary btn-sm btn-modal-cancel">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: Admin Create / Edit Event -->
+  <div class="modal-backdrop" id="adminEventModal" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="adminModalTitle">Create New Event</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="adminEventForm">
+          <input type="hidden" id="adminEventId">
+
+          <div class="form-group">
+            <label class="form-label" for="adminEventName">Event Name <span class="req">*</span></label>
+            <input type="text" id="adminEventName" class="form-control" placeholder="e.g. AI Innovation Summit" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="adminEventCategory">Category <span class="req">*</span></label>
+              <select id="adminEventCategory" class="form-control" required>
+                <option value="Technical">Technical</option>
+                <option value="Cultural">Cultural</option>
+                <option value="Sports">Sports</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Seminar">Seminar</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="adminEventCapacity">Maximum Capacity <span class="req">*</span></label>
+              <input type="number" id="adminEventCapacity" class="form-control" min="1" max="500" value="50" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="adminEventDate">Event Date <span class="req">*</span></label>
+              <input type="date" id="adminEventDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="adminEventTime">Time Slot <span class="req">*</span></label>
+              <input type="text" id="adminEventTime" class="form-control" placeholder="e.g. 09:30 AM - 04:30 PM" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="adminEventVenue">Venue <span class="req">*</span></label>
+              <input type="text" id="adminEventVenue" class="form-control" placeholder="e.g. Main Auditorium" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="adminEventDeadline">Registration Deadline <span class="req">*</span></label>
+              <input type="date" id="adminEventDeadline" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="adminEventDesc">Description & Highlights</label>
+            <textarea id="adminEventDesc" class="form-control" rows="3" placeholder="Provide detailed event agenda, eligibility, and cash awards..."></textarea>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+            <button type="button" class="btn btn-secondary btn-modal-cancel">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Event</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="alert-toast" id="alertToast" role="alert"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p><strong>College Event Registration System</strong> | Web Technologies Academic Submission</p>
+    <p>Student: <strong>Yuvathilagan</strong> | Department of Computer Science and Engineering</p>
+  </footer>
+
+  <script src="src/js/app.js"></script>
+</body>
+</html>

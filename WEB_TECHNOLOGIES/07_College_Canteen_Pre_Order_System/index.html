@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Canteen Pre-Order System | Prathyusha Food Court</title>
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+  <!-- Global Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">🍽️</div>
+        <div>
+          <h1>Prathyusha Annapoorna Food Court</h1>
+          <p class="sub-brand">College Canteen Pre-Order, Dynamic Cart & Live Kitchen Status</p>
+        </div>
+      </div>
+      <div class="role-selector">
+        <label for="portalRoleSwitch"><strong>Active Portal:</strong></label>
+        <select id="portalRoleSwitch" class="form-select">
+          <option value="student">Student Food Ordering</option>
+          <option value="canteen">Canteen Staff & Kitchen</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- STUDENT VIEW -->
+    <section id="studentView" class="portal-view">
+      <!-- Tabs -->
+      <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="tabMenu">🍔 Food Menu & Order</button>
+        <button class="tab-btn" data-tab="tabMyOrders">🧾 My Orders & Live Status</button>
+      </div>
+
+      <!-- Tab 1: Menu & Cart Layout -->
+      <div id="tabMenu" class="tab-content active">
+        <div class="canteen-layout">
+          <!-- Food Menu Column -->
+          <div class="menu-column">
+            <!-- Filter Bar -->
+            <div class="filter-bar card">
+              <div class="search-box">
+                <input type="text" id="foodSearchInput" class="form-input" placeholder="Search delicious snacks, meals, drinks...">
+              </div>
+              <div class="category-pills" id="categoryPills">
+                <button class="pill-btn active" data-category="">All Categories</button>
+                <button class="pill-btn" data-category="Breakfast">Breakfast</button>
+                <button class="pill-btn" data-category="Meals">Meals</button>
+                <button class="pill-btn" data-category="Snacks">Snacks</button>
+                <button class="pill-btn" data-category="Drinks">Drinks</button>
+                <button class="pill-btn" data-category="Desserts">Desserts</button>
+              </div>
+            </div>
+
+            <!-- Menu Items Grid -->
+            <div id="foodGrid" class="food-grid">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Dynamic Shopping Cart Column -->
+          <aside class="cart-column">
+            <div class="card cart-card">
+              <div class="cart-header">
+                <h3>🛒 Your Food Tray</h3>
+                <span id="cartCountBadge" class="badge badge-primary">0 Items</span>
+              </div>
+
+              <div id="cartItemsList" class="cart-items-list">
+                <!-- Cart items rendered dynamically -->
+              </div>
+
+              <!-- Dynamic Bill Calculation Box -->
+              <div class="bill-calculation-box">
+                <div class="calc-row">
+                  <span>Subtotal:</span>
+                  <span id="billSubtotal">₹0.00</span>
+                </div>
+                <div class="calc-row">
+                  <span>GST & Kitchen Packaging (5%):</span>
+                  <span id="billTax">₹0.00</span>
+                </div>
+                <div class="calc-row grand-total-row">
+                  <span>Grand Total:</span>
+                  <strong id="billGrandTotal">₹0.00</strong>
+                </div>
+              </div>
+
+              <button id="btnProceedCheckout" class="btn btn-primary btn-block btn-lg" disabled>
+                Proceed to Order (₹0.00) →
+              </button>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Tab 2: My Orders & Pickup Status -->
+      <div id="tabMyOrders" class="tab-content hidden">
+        <div class="card">
+          <div class="table-header">
+            <h2>My Active Food Orders & Pickup Tokens</h2>
+            <span id="myOrdersCountBadge" class="badge badge-info">0 Orders Placed</span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order Number</th>
+                  <th>Pickup Token</th>
+                  <th>Ordered Items</th>
+                  <th>Total Amount</th>
+                  <th>Order Placed At</th>
+                  <th>Live Kitchen Status</th>
+                </tr>
+              </thead>
+              <tbody id="myOrdersTbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CANTEEN STAFF & KITCHEN VIEW -->
+    <section id="canteenView" class="portal-view hidden">
+      <!-- Canteen KPI Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📋</div>
+          <div>
+            <div class="stat-value" id="kpiTotalOrders">0</div>
+            <div class="stat-label">Total Orders Today</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🍳</div>
+          <div>
+            <div class="stat-value" id="kpiPreparingOrders">0</div>
+            <div class="stat-label">In Kitchen (Preparing)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔔</div>
+          <div>
+            <div class="stat-value" id="kpiReadyOrders">0</div>
+            <div class="stat-label">Ready for Pickup</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">💵</div>
+          <div>
+            <div class="stat-value" id="kpiTotalRevenue">₹0</div>
+            <div class="stat-label">Gross Revenue</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kitchen Orders Board -->
+      <div class="card">
+        <div class="admin-top-bar">
+          <h2>Live Kitchen Order Processing Board</h2>
+          <div class="btn-group">
+            <button id="btnAddMenuItem" class="btn btn-primary">+ Add New Food Item</button>
+            <button id="btnResetData" class="btn btn-outline">↺ Reset Sample Menu</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Order No</th>
+                <th>Token</th>
+                <th>Student / Phone</th>
+                <th>Order Items & Qty</th>
+                <th>Grand Total</th>
+                <th>Current Status</th>
+                <th>Kitchen Workflow Action</th>
+              </tr>
+            </thead>
+            <tbody id="kitchenOrdersTbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Checkout / Customer Details -->
+  <div id="checkoutModal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Confirm Canteen Pre-Order</h3>
+        <button class="modal-close" data-close="checkoutModal">&times;</button>
+      </div>
+      <form id="checkoutForm" novalidate>
+        <div class="modal-body">
+          <div class="alert alert-info" style="margin-bottom: 1rem;">
+            Order Total: <strong id="modalCheckoutTotal">₹0.00</strong> (<span id="modalCheckoutQty">0</span> items)
+          </div>
+
+          <div class="form-group">
+            <label for="custName">Student Name <span class="required">*</span></label>
+            <input type="text" id="custName" class="form-input" placeholder="e.g. Yuvathilagan M" value="Yuvathilagan M" required>
+            <div class="error-msg" id="errCustName"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="custId">Student ID</label>
+            <input type="text" id="custId" class="form-input" value="PEC2023CS001" required>
+          </div>
+
+          <div class="form-group">
+            <label for="custPhone">Mobile Contact (for SMS/Token) <span class="required">*</span></label>
+            <input type="tel" id="custPhone" class="form-input" placeholder="e.g. 9876543210" value="9876543210" required>
+            <div class="error-msg" id="errCustPhone"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="checkoutModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Pay & Place Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Add Menu Item -->
+  <div id="menuItemModal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Add Food Menu Item</h3>
+        <button class="modal-close" data-close="menuItemModal">&times;</button>
+      </div>
+      <form id="menuItemForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="itemName">Food Item Name <span class="required">*</span></label>
+            <input type="text" id="itemName" class="form-input" placeholder="e.g. Veg Fried Rice" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="itemCategory">Category <span class="required">*</span></label>
+              <select id="itemCategory" class="form-select" required>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Meals">Meals</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Drinks">Drinks</option>
+                <option value="Desserts">Desserts</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="itemPrice">Price (₹) <span class="required">*</span></label>
+              <input type="number" id="itemPrice" class="form-input" min="5" value="60" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="itemIcon">Icon / Emoji</label>
+              <input type="text" id="itemIcon" class="form-input" value="🍲" required>
+            </div>
+            <div class="form-group">
+              <label for="itemStock">Stock Availability</label>
+              <select id="itemStock" class="form-select">
+                <option value="true">In Stock</option>
+                <option value="false">Out of Stock</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="itemDesc">Item Description</label>
+            <input type="text" id="itemDesc" class="form-input" placeholder="Short description..." value="Freshly prepared delicious item.">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="menuItemModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Item to Menu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>&copy; 2026 Prathyusha Engineering College &mdash; Canteen Services. Web Technologies Academic Project. Designed by Yuvathilagan.</p>
+  </footer>
+
+  <script src="src/js/app.js"></script>
+</body>
+</html>

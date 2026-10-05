@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Complaint and Maintenance Portal | Prathyusha Estate Office</title>
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+  <!-- Global Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">🛠️</div>
+        <div>
+          <h1>Prathyusha Campus Maintenance Portal</h1>
+          <p class="sub-brand">Facility Complaints, Technician Dispatch & Maintenance Service Workflow</p>
+        </div>
+      </div>
+      <div class="role-selector">
+        <label for="portalRoleSwitch"><strong>Active Portal:</strong></label>
+        <select id="portalRoleSwitch" class="form-select">
+          <option value="student">Student Portal</option>
+          <option value="admin">Estate Office / Admin</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- STUDENT PORTAL -->
+    <section id="studentView" class="portal-view">
+      <!-- Active Student Selector -->
+      <div class="student-bar card">
+        <div class="flex-between">
+          <div>
+            <strong>Active Student Member:</strong>
+            <select id="studentUserSelect" class="form-select" style="display:inline-block; width: auto; margin-left: 0.5rem;">
+              <option value="PEC2023CS001">PEC2023CS001 - Yuvathilagan M (CSE)</option>
+              <option value="PEC2023CS002">PEC2023CS002 - Kavitha R (CSE)</option>
+              <option value="PEC2023IT003">PEC2023IT003 - Dinesh Kumar S (IT)</option>
+            </select>
+          </div>
+          <div>
+            <span class="badge badge-info">Campus Maintenance Helpdesk</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="tabLodge">📝 Lodge New Complaint</button>
+        <button class="tab-btn" data-tab="tabTrack">🔍 Track My Complaints & Feedback</button>
+      </div>
+
+      <!-- Tab 1: Lodge Complaint -->
+      <div id="tabLodge" class="tab-content active">
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
+          <h2>Submit Campus Maintenance Complaint</h2>
+          <p class="sub-text">Report infrastructure, electrical, plumbing, lab, or cleanliness issues for rapid resolution.</p>
+
+          <form id="complaintForm" novalidate style="margin-top: 1.5rem;">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="formCategory">Maintenance Category <span class="required">*</span></label>
+                <select id="formCategory" class="form-select" required>
+                  <option value="Classroom">Classroom</option>
+                  <option value="Laboratory">Laboratory</option>
+                  <option value="Wi-Fi">Wi-Fi</option>
+                  <option value="Electricity">Electricity</option>
+                  <option value="Water">Water</option>
+                  <option value="Hostel">Hostel</option>
+                  <option value="Cleanliness">Cleanliness</option>
+                  <option value="Infrastructure">Infrastructure</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="formPriority">Issue Urgency / Priority</label>
+                <select id="formPriority" class="form-select">
+                  <option value="Low">Low (Routine maintenance)</option>
+                  <option value="Medium" selected>Medium (Impacting study/comfort)</option>
+                  <option value="High">High (Immediate hazard / Complete disruption)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="formLocation">Specific Campus Location <span class="required">*</span></label>
+                <input type="text" id="formLocation" class="form-input" placeholder="e.g. IT Block - 2nd Floor Room 204" required>
+                <div class="error-msg" id="errLocation"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="formContactPhone">Your Phone Number <span class="required">*</span></label>
+                <input type="tel" id="formContactPhone" class="form-input" placeholder="e.g. 9876543210" value="9876543210" required>
+                <div class="error-msg" id="errPhone"></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="formTitle">Complaint Summary / Title <span class="required">*</span></label>
+              <input type="text" id="formTitle" class="form-input" placeholder="e.g. Projector HDMI port broken in Room 204" required>
+              <div class="error-msg" id="errTitle"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="formDescription">Detailed Description <span class="required">*</span></label>
+              <textarea id="formDescription" class="form-input" rows="4" placeholder="Describe the maintenance defect in detail..." required></textarea>
+              <div class="error-msg" id="errDescription"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="formImage">Attach Optional Photo (Defect Evidence)</label>
+              <input type="file" id="formImage" class="form-input" accept="image/*">
+              <div id="imagePreviewContainer" class="image-preview hidden"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Submit Maintenance Ticket →</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Tab 2: Track Complaints -->
+      <div id="tabTrack" class="tab-content hidden">
+        <div class="card">
+          <div class="table-header">
+            <h2>My Submitted Tickets & Service Progress</h2>
+            <span id="studentTicketCountBadge" class="badge badge-info">0 Tickets</span>
+          </div>
+
+          <div id="studentTicketsContainer" class="tickets-timeline-list">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN / ESTATE OFFICE PORTAL -->
+    <section id="adminView" class="portal-view hidden">
+      <!-- KPI Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📑</div>
+          <div>
+            <div class="stat-value" id="kpiTotalComplaints">0</div>
+            <div class="stat-label">Total Complaints</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏳</div>
+          <div>
+            <div class="stat-value" id="kpiPendingComplaints">0</div>
+            <div class="stat-label">Pending / Unassigned</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔧</div>
+          <div>
+            <div class="stat-value" id="kpiInProgressComplaints">0</div>
+            <div class="stat-label">In Progress (Work Underway)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div>
+            <div class="stat-value" id="kpiResolvedComplaints">0</div>
+            <div class="stat-label">Resolved & Closed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complaints Management Roster -->
+      <div class="card">
+        <div class="admin-top-bar">
+          <h2>Master Maintenance Desk Roster</h2>
+          <button id="btnResetData" class="btn btn-outline">↺ Reset Sample Complaints</button>
+        </div>
+
+        <div class="filter-bar" style="background:#f8fafc; padding: 0.75rem; border-radius: var(--radius); margin-bottom: 1rem;">
+          <input type="text" id="adminSearchInput" class="form-input" placeholder="Search by Ticket ID, Title, or Location..." style="max-width: 320px;">
+          <select id="adminCategoryFilter" class="form-select" style="max-width: 200px;">
+            <option value="">All Categories</option>
+            <option value="Classroom">Classroom</option>
+            <option value="Laboratory">Laboratory</option>
+            <option value="Wi-Fi">Wi-Fi</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Water">Water</option>
+            <option value="Hostel">Hostel</option>
+            <option value="Cleanliness">Cleanliness</option>
+            <option value="Infrastructure">Infrastructure</option>
+            <option value="Other">Other</option>
+          </select>
+          <select id="adminStatusFilter" class="form-select" style="max-width: 180px;">
+            <option value="">All Statuses</option>
+            <option value="Submitted">Submitted</option>
+            <option value="Assigned">Assigned</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Ticket ID</th>
+                <th>Student & Phone</th>
+                <th>Category</th>
+                <th>Location & Title</th>
+                <th>Priority</th>
+                <th>Assigned Staff</th>
+                <th>Workflow Status</th>
+                <th>Desk Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminComplaintsTbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Assign Technician -->
+  <div id="assignModal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3 id="assignModalTitle">Assign Maintenance Staff</h3>
+          <p id="assignModalSub" class="sub-text">Ticket</p>
+        </div>
+        <button class="modal-close" data-close="assignModal">&times;</button>
+      </div>
+      <form id="assignForm">
+        <div class="modal-body">
+          <input type="hidden" id="assignTicketId">
+          <div class="form-group">
+            <label for="technicianSelect">Select Maintenance Personnel / Technician <span class="required">*</span></label>
+            <select id="technicianSelect" class="form-select" required>
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="assignModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Dispatch Staff</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Provide Feedback -->
+  <div id="feedbackModal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3>Rate Maintenance Resolution</h3>
+          <p id="feedbackTicketSub" class="sub-text">Ticket</p>
+        </div>
+        <button class="modal-close" data-close="feedbackModal">&times;</button>
+      </div>
+      <form id="feedbackForm">
+        <div class="modal-body">
+          <input type="hidden" id="feedbackTicketId">
+
+          <div class="form-group">
+            <label>Service Quality Rating (1 to 5 Stars):</label>
+            <div class="star-rating" id="starRatingBox">
+              <span class="star" data-rating="1">★</span>
+              <span class="star" data-rating="2">★</span>
+              <span class="star" data-rating="3">★</span>
+              <span class="star" data-rating="4">★</span>
+              <span class="star active" data-rating="5">★</span>
+            </div>
+            <input type="hidden" id="feedbackRatingVal" value="5">
+          </div>
+
+          <div class="form-group">
+            <label for="feedbackComment">Student Feedback Comments</label>
+            <textarea id="feedbackComment" class="form-input" rows="3" placeholder="Share your experience regarding resolution speed and quality..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="feedbackModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Feedback & Close Ticket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>&copy; 2026 Prathyusha Engineering College &mdash; Estate Office & Facility Maintenance. Web Technologies Academic Project. Designed by Yuvathilagan.</p>
+  </footer>
+
+  <script src="src/js/app.js"></script>
+</body>
+</html>

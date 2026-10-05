@@ -1,0 +1,105 @@
+{
+  "portalName": "Prathyusha Career & Placement Portal",
+  "jobTypes": ["Full-Time", "Internship", "Remote / Hybrid"],
+  "locations": ["Chennai", "Bangalore", "Hyderabad", "Remote"],
+  "applicationStatuses": [
+    "Applied",
+    "Under Review",
+    "Shortlisted",
+    "Interview",
+    "Selected",
+    "Rejected"
+  ],
+  "jobs": [
+    {
+      "id": "JOB-101",
+      "title": "Full Stack Web Developer Intern",
+      "company": "Zoho Corporation",
+      "location": "Chennai",
+      "jobType": "Internship",
+      "requiredSkills": ["HTML5", "CSS3", "JavaScript", "Node.js", "SQL"],
+      "eligibility": "B.E / B.Tech (CSE, IT) - Min 7.5 CGPA, No Active Backlogs",
+      "deadline": "2026-11-15",
+      "stipend": "₹25,000 / Month",
+      "description": "Develop scalable web interfaces and backend services for Zoho Creator and CRM platforms. Ideal for hands-on JavaScript enthusiasts."
+    },
+    {
+      "id": "JOB-102",
+      "title": "Associate Frontend Software Engineer",
+      "company": "Freshworks Inc.",
+      "location": "Chennai",
+      "jobType": "Full-Time",
+      "requiredSkills": ["JavaScript", "HTML5", "CSS Grid", "REST APIs", "Git"],
+      "eligibility": "Final Year Engineering Students - Min 7.0 CGPA",
+      "deadline": "2026-10-30",
+      "stipend": "₹8.5 LPA",
+      "description": "Design accessible customer support interfaces with rich animations, responsive CSS, and high-performance DOM manipulation."
+    },
+    {
+      "id": "JOB-103",
+      "title": "Cloud Systems & DevOps Intern",
+      "company": "Infosys Ltd.",
+      "location": "Bangalore",
+      "jobType": "Internship",
+      "requiredSkills": ["Linux", "Bash", "Python", "Networking", "Docker Basics"],
+      "eligibility": "B.E / B.Tech - 6.5+ CGPA",
+      "deadline": "2026-11-20",
+      "stipend": "₹20,000 / Month",
+      "description": "Assist infrastructure teams in automating CI/CD build scripts, server monitoring, and cloud system deployments."
+    },
+    {
+      "id": "JOB-104",
+      "title": "Junior Data Analyst",
+      "company": "Tata Consultancy Services",
+      "location": "Hyderabad",
+      "jobType": "Full-Time",
+      "requiredSkills": ["SQL", "Excel", "Python", "PowerBI", "Statistics"],
+      "eligibility": "Graduating Class of 2026 - All Engineering Branches",
+      "deadline": "2026-11-05",
+      "stipend": "₹6.0 LPA",
+      "description": "Query relational databases, build business intelligence dashboards, and clean enterprise transaction datasets."
+    },
+    {
+      "id": "JOB-105",
+      "title": "Remote React & Node.js Developer",
+      "company": "Cognizant Interactive",
+      "location": "Remote",
+      "jobType": "Remote / Hybrid",
+      "requiredSkills": ["JavaScript", "Node.js", "Express", "REST APIs"],
+      "eligibility": "Final Year Students - Min 7.0 CGPA",
+      "deadline": "2026-12-01",
+      "stipend": "₹7.2 LPA",
+      "description": "Collaborate in an agile distributed remote team building modern responsive web applications and API microservices."
+    }
+  ],
+  "applications": [
+    {
+      "id": "APP-5001",
+      "jobId": "JOB-101",
+      "jobTitle": "Full Stack Web Developer Intern",
+      "company": "Zoho Corporation",
+      "studentId": "PEC2023CS001",
+      "studentName": "Yuvathilagan M",
+      "email": "yuva.pec@gmail.com",
+      "phone": "9876543210",
+      "cgpa": "9.60",
+      "resumeFilename": "Yuvathilagan_Resume_WebTech.pdf",
+      "appliedDate": "2026-10-01",
+      "status": "Shortlisted"
+    },
+    {
+      "id": "APP-5002",
+      "jobId": "JOB-102",
+      "jobTitle": "Associate Frontend Software Engineer",
+      "company": "Freshworks Inc.",
+      "studentId": "PEC2023CS002",
+      "studentName": "Kavitha R",
+      "email": "kavitha.r@gmail.com",
+      "phone": "9876543211",
+      "cgpa": "8.50",
+      "resumeFilename": "Kavitha_Resume.pdf",
+      "appliedDate": "2026-10-02",
+      "status": "Under Review"
+    }
+  ]
+}

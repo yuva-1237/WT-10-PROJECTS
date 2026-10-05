@@ -1,0 +1,78 @@
+{
+  "institution": "Prathyusha Engineering College",
+  "departments": [
+    "Computer Science and Engineering",
+    "Information Technology",
+    "Computer Science and Business Systems",
+    "Electronics and Communication Engineering"
+  ],
+  "subjects": [
+    { "code": "CS3401", "name": "Web Technologies", "credits": 4 },
+    { "code": "CS3491", "name": "Artificial Intelligence and Machine Learning", "credits": 4 },
+    { "code": "CS3492", "name": "Database Management Systems", "credits": 3 },
+    { "code": "CS3451", "name": "Design and Analysis of Algorithms", "credits": 4 },
+    { "code": "GE3451", "name": "Environmental Sciences and Sustainability", "credits": 2 }
+  ],
+  "students": [
+    {
+      "id": "PEC2023CS001",
+      "name": "Yuvathilagan M",
+      "department": "Computer Science and Engineering",
+      "year": "3rd Year",
+      "email": "yuva.pec@gmail.com",
+      "phone": "9876543210",
+      "records": [
+        { "subjectCode": "CS3401", "internal": 38, "external": 56, "attendance": 96 },
+        { "subjectCode": "CS3491", "internal": 36, "external": 54, "attendance": 92 },
+        { "subjectCode": "CS3492", "internal": 35, "external": 50, "attendance": 88 },
+        { "subjectCode": "CS3451", "internal": 34, "external": 52, "attendance": 94 },
+        { "subjectCode": "GE3451", "internal": 39, "external": 58, "attendance": 98 }
+      ]
+    },
+    {
+      "id": "PEC2023CS002",
+      "name": "Kavitha R",
+      "department": "Computer Science and Engineering",
+      "year": "3rd Year",
+      "email": "kavitha.r@gmail.com",
+      "phone": "9876543211",
+      "records": [
+        { "subjectCode": "CS3401", "internal": 35, "external": 48, "attendance": 90 },
+        { "subjectCode": "CS3491", "internal": 32, "external": 45, "attendance": 85 },
+        { "subjectCode": "CS3492", "internal": 34, "external": 49, "attendance": 88 },
+        { "subjectCode": "CS3451", "internal": 30, "external": 42, "attendance": 82 },
+        { "subjectCode": "GE3451", "internal": 38, "external": 52, "attendance": 95 }
+      ]
+    },
+    {
+      "id": "PEC2023IT003",
+      "name": "Dinesh Kumar S",
+      "department": "Information Technology",
+      "year": "3rd Year",
+      "email": "dinesh.k@gmail.com",
+      "phone": "9876543212",
+      "records": [
+        { "subjectCode": "CS3401", "internal": 28, "external": 35, "attendance": 78 },
+        { "subjectCode": "CS3491", "internal": 25, "external": 38, "attendance": 74 },
+        { "subjectCode": "CS3492", "internal": 29, "external": 40, "attendance": 80 },
+        { "subjectCode": "CS3451", "internal": 24, "external": 32, "attendance": 72 },
+        { "subjectCode": "GE3451", "internal": 35, "external": 45, "attendance": 86 }
+      ]
+    },
+    {
+      "id": "PEC2023CB004",
+      "name": "Pooja V",
+      "department": "Computer Science and Business Systems",
+      "year": "2nd Year",
+      "email": "pooja.v@gmail.com",
+      "phone": "9876543213",
+      "records": [
+        { "subjectCode": "CS3401", "internal": 39, "external": 57, "attendance": 98 },
+        { "subjectCode": "CS3491", "internal": 38, "external": 55, "attendance": 96 },
+        { "subjectCode": "CS3492", "internal": 37, "external": 53, "attendance": 94 },
+        { "subjectCode": "CS3451", "internal": 36, "external": 51, "attendance": 91 },
+        { "subjectCode": "GE3451", "internal": 40, "external": 59, "attendance": 99 }
+      ]
+    }
+  ]
+}
